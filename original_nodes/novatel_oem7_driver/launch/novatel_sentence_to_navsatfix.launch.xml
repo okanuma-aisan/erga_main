@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <group>
+    <group>
+      <push-ros-namespace namespace="novatel_oem7"/>
+
+      <node pkg="novatel_oem7_driver" exec="novatel_sentence_to_navsatfix" name="novatel_sentence_to_navsatfix" output="screen">
+      </node>
+    </group>
+  </group>
+</launch>

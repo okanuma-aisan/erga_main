@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="ip" default="192.168.1.20"/>
+  <arg name="port_ekf" default="4001"/>
+  <arg name="port_ekf_aichi" default="111111111111111111111111111"/>
+  <arg name="kinetic_stat_ekf" default="/localization/pose_twist_fusion_filter/kinematic_state"/>
+  <arg name="kinetic_stat_aichi" default="/localization/pose_twist_fusion_filter/kinematic_state_aichi"/>
+
+  <group>
+    <node pkg="pose_udp_pub" exec="pose_udp_pub" name="pose_udp_pub" output="screen">
+      <param name="ip" value="$(var ip)"/>
+      <param name="port" value="$(var port_ekf)"/>
+      <remap from="input_kinematic_stat" to="$(var kinetic_stat_ekf)"/>
+    </node>
+
+    <!--node pkg="pose_udp_pub" exec="pose_udp_pub" name="pose_udp_pub_ekf_aichi" output="screen">
+      <param name="ip" value="$(var ip)"/>
+      <param name="port" value="$(var port_ekf_aichi)"/>
+      <remap from="input_kinematic_stat" to="$(var kinetic_stat_aichi)"/>
+    </node-->
+  </group>
+</launch>

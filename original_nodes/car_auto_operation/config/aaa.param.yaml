@@ -1,0 +1,11 @@
+/wheel_transfomr:
+  ros__parameters:
+    steering_can_value_left_to_wheelrad_slope: 0.000926189
+    steering_can_value_left_to_wheelrad_intercept: 0.050007438
+    steering_can_value_right_to_wheelrad_slope: 0.000887424
+    steering_can_value_right_to_wheelrad_intercept: 0.031315874
+
+/steer_operation:
+  ros__parameters:
+    steer_input_left_max: 1941
+    steer_input_right_min: 0

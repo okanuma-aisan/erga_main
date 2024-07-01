@@ -1,0 +1,81 @@
+#include "builtin_interfaces/msg/Time.idl"
+
+module wada_vmc_msgs {
+  module msg {
+    module Can100_20210103_Constants {
+      const uint8 STEER_FIRSTLOCK_OPEN = 5;//joyボードの起動時ロック解除命令1
+      const uint8 PEDAL_FIRSTLOCK_OPEN = 5;//joyボードの起動時ロック解除命令1
+      const uint8 STEER_V0 = 0;//ステアV0指令(joyコントローラー操作)
+      const uint8 PEDAL_V0 = 0;//ペダルV0指令(joyコントローラー操作)
+      const uint8 STEER_AUTO = 10;//ステア自動
+      const uint8 PEDAL_AUTO = 11;//ペダル自動
+    };
+    
+    struct Can100_20210103 {
+      builtin_interfaces::msg::Time stamp;
+
+      @default (value=0)
+      uint8 steer_control_mode;//steerの自動・手動状態
+
+      @default (value=0)
+      uint8 pedal_control_mode;//pedalの自動・手動状態
+
+      @default (value=0)
+      int16 steer_command;//ハンドル角度指令
+
+      @default (value=0.0)
+      float steer_command_deg;//ハンドル角度指令(deg)
+
+      @default (value=0)
+      int16 pedal_command;//ペダル指令
+
+      @default (value=FALSE)
+      boolean emergency_brake;//緊急ブレーキ
+
+      @default (value=FALSE)
+      boolean fail_safe_lighting;//フェイルセーフON
+
+      @default (value=FALSE)
+      boolean pedal_auto_permission;//ペダルフェイルセーフ
+
+      @default (value=FALSE)
+      boolean handle_auto_permission;//ステアフェイルセーフ
+
+      @default (value=FALSE)
+      boolean automatic_door_open;//自動扉オープン
+
+      @default (value=FALSE)
+      boolean auto_stop_incomplete;//自動停止未完了
+
+      @default (value=FALSE)
+      boolean blinker_right;//ウィンカー右
+
+      @default (value=FALSE)
+      boolean blinker_left;//ウィンカー左
+
+      @default (value=FALSE)
+      boolean hazard_lamp;//ハザードランプ
+
+      @default (value=FALSE)
+      boolean blinker_hazard_cancel;//ウィンカーハザードキャンセル
+
+      @default (value=FALSE)
+      boolean steer_automatic_ban;//ステア自動禁止
+
+      @default (value=FALSE)
+      boolean pedal_automatic_ban;//ペダル自動禁止
+
+      @default (value=FALSE)
+      boolean shift_automatic_ban;//シフト自動禁止
+
+      @default (value=FALSE)
+      boolean shift_R;//シフトR
+
+      @default (value=FALSE)
+      boolean shift_N;//シフトN
+
+      @default (value=FALSE)
+      boolean shift_D;//シフトD
+    };
+  };
+};

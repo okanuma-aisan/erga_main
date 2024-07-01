@@ -1,0 +1,34 @@
+/**:
+  ros__parameters:
+    can_update_time_th_sec: 0.3 #joy boardの情報更新がこの時間をすぎたらエラー判定にする
+
+    #joy board
+    joy_board_model: 20221111 #wada joy boardのバージョン
+    steering_can_value_left_to_tire_rad_slope: 0.000873527 #0.000926189 #CAN値からタイヤ角の変換係数(左傾き)
+    steering_can_value_left_to_tire_rad_intercept: 0.0 #0.050007438 #CAN値からタイヤ角の変換係数(左切片)
+    steering_can_value_right_to_tire_rad_slope: 0.000901032 #0.000887424 #CAN値からタイヤ角の変換係数(右傾き)
+    steering_can_value_right_to_tire_rad_intercept: 0.0 #0.031315874 #CAN値からタイヤ角の変換係数(右切片)
+    tire_rad_to_steering_can_value_left_slope: 1144.208532 #1079.164926 #タイヤ角からCAN値の変換係数(左傾き)
+    tire_rad_to_steering_can_value_left_intercept: 0.0 #-27.63333633 #タイヤ角からCAN値の変換係数(左切片)
+    tire_rad_to_steering_can_value_right_slope: 1109.054568 #1126.746545 #タイヤ角からCAN値の変換係数(右傾き)
+    tire_rad_to_steering_can_value_right_intercept: 0.0 #-35.33024986 #タイヤ角からCAN値の変換係数(右切片)
+    steer_input_left_max: 2000 #1941 #ステア最大値(左)
+    steer_input_right_min: 100 #0 #ステア最小値(右)
+    steer_input_center: 1042 #1038 #1054 #ステア中立値
+    pedal_input_brake_max: 1500 #ブレーキ最大値
+    pedal_input accel_min: 100 #アクセル最小値
+    pedal_input_center: 1024 #ペダル中立値
+    
+    #自動運転許可ノード
+    ndt_transform_probability_min: 1.5 #ndt精度しきい値
+    ndt_over_count_th: 3 #ndt精度低下がこの回数発生したらエラー
+    gnss_lat_dev_th: 0.12 #gnss latしきい値
+    gnss_lon_dev_th: 0.12 #gnss lonしきい値
+    gnss_alt_dev_th: 0.15 #gnss altしきい値
+    pos_time_diff_th: 0.2 #車両位置更新時間しきい値
+    vel_time_diff_th: 0.2 #車両速度更新時間しきい値
+    position_and_path_distance_th: 1.0 #車両位置と経路との距離しきい値
+    position_and_path_angular_th_deg: 20.0 #車両位置と経路との向きしきい値
+    
+    #ステア操作
+    use_beta: false #横滑り角を使用するか？

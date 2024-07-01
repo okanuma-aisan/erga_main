@@ -1,0 +1,14 @@
+<launch>
+  <arg name="param_path" default="$(find-pkg-share gsm8_monitor)/config/gsm8_monitor.params.yaml" />
+
+  <arg name="m0_status_topic" default="/gsm8/can/status/m0_status" />
+  <arg name="gnss_velocity_topic" default="/sensing/gnss/ublox/fix_velocity" />
+
+  <node pkg="gsm8_monitor" name="gsm8_monitor" exec="gsm8_monitor" output="screen">
+    <param from="$(var param_path)" />
+
+    <remap from="~/input/m0status" to="$(var m0_status_topic)" />
+    <remap from="~/input/gnss_velocity" to="$(var gnss_velocity_topic)" />
+  </node>
+
+</launch>

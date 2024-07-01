@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <node pkg="vehicle_can_info" exec="main" name="vehicle_info_publisher" output="screen">
+    <!--remap from="velocity_status_rear" to="/vehicle/status/velocity_status"/-->
+  </node>
+
+</launch>

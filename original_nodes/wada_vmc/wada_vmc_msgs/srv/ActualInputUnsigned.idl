@@ -1,0 +1,11 @@
+module wada_vmc_msgs {
+  module srv {
+    struct ActualInputUnsigned_Request {
+      @default (value=0)
+      int16 input;
+    };
+    struct ActualInputUnsigned_Response {
+      boolean success;
+    };
+  };
+};

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="use_ros1" default="true"/>
+  <group>
+    <push-ros-namespace namespace="vehicle"/>
+    <group unless="$(var use_ros1)">
+      <push-ros-namespace namespace="wada_vmc"/>
+      <include file="$(find-pkg-share wada_vmc)/launch/kvaser_rainbow.launch.xml"/>
+    </group>
+    <group if="$(var use_ros1)">
+      <push-ros-namespace namespace="wada_vmc"/>
+      <include file="$(find-pkg-share wada_vmc_udp_sub)/launch/wada_vmc_udp_sub.launch.xml">
+        <arg name="steering_status" value="/vehicle/status/steering_status"/>
+        <arg name="velocity_status" value="/vehicle/status/velocity_status"/>
+      </include>
+    </group>
+
+    <!--group>
+      <push-ros-namespace namespace="vcan"/>
+      <include file="$(find-pkg-share vehicle_can_info)/vehicle_can_info.launch.xml"/>
+    </group-->
+    <!--group>
+      <push-ros-namespace namespace="contec"/>
+      <include file="$(find-pkg-share contec_dio)/launch/contec_dio.launch.py"/>
+    </group-->
+
+    <group unless="$(var use_ros1)">
+      <push-ros-namespace namespace="report_selector"/>
+      <include file="$(find-pkg-share report_selector)/launch/velocity_report_selector.launch.xml">
+        <arg name="in_vel_can" value="/vehicle/wada_vmc/velocity_status"/>
+        <arg name="in_vel_gnss" value="/sensing/gnss/novatel_oem7/velocity_report"/>
+        <arg name="in_gnss_solution" value="/sensing/gnss/novatel_oem7/solution"/>
+        <arg name="out_vel" value="/vehicle/status/velocity_status"/>
+      </include>
+    </group>
+    
+    <group>
+      <push-ros-namespace namespace="auto_permission"/>
+      <include file="$(find-pkg-share auto_permission)/launch/auto_permission.launch.xml">
+      	<arg name="transform_probability" value="/localization/pose_estimator/transform_probability"/>
+      	<arg name="nearest_voxel_transformation_likelihood" value="/localization/pose_estimator/nearest_voxel_transformation_likelihood"/>
+      	<arg name="gnss_dev" value="/sensing/gnss/novatel_oem7/pos_var"/>
+      	<arg name="kinematic_stat" value="/localization/kinematic_state"/>
+      	<arg name="scenario_trajectry" value="/planning/scenario_planning/trajectory"/>
+      	<arg name="scenario_path" value="/planning/scenario_planning/lane_driving/behavior_planning/path"/>
+      	<arg name="steer_auto_mode" value="/vehicle/wada_vmc/steer_auto"/>
+      	<arg name="pedal_auto_mode" value="/vehicle/wada_vmc/pedal_auto"/>
+        <arg name="param_file" value="$(find-pkg-share autoware_rainbow_launch)/config/can/auto_permission/auto_permission.param.yaml"/>
+      </include>
+    </group>
+  </group>
+</launch>

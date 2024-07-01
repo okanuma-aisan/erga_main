@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="oauth2_client_id" default="xyC7A93N3SsoHDrYUWDDfj" />
+  <arg name="oauth2_subject_id" default="t4:c18cf411-b5df-4738-a7df-21a336a98904" />
+  <arg name="oauth2_private_key" default="LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBMmVvMmJjYy9QZzIvOStZbmpJOFB4RCtldHRMZlpvVlROMU1JMlFjZW1DOU1LSjY0CmVHNVJOdzBPWHAzUnpTcHQ3TUFlTTg5V1J6MzRsWHBtdURBRkRYbEV1OERJNkU0UE5nQnhJUjQ3VTBDaytaZG0KbVBjdFdmQWVheU5UV25lSmMwMGkwa2EyTmdtOW42dDQ4Ny9xY0pXNzJLaGZWZ2JrVnlLTFAvRlVDYkUyS0pEYworbEJ4cFpYUk1NZWZCUGs1SEZmREZQV0d3eEhkRUs5TDdrTlRRV2dBYnVPZ1FSbXJFMGc2NFdRbnlWbDRoSWVICjJHK1lGdlhTb3hKWU1lQnVmWWlSdmtSRy81bEExOVpETW93bGdzMGxSaFhYZm1YOVFVVFFVL0djVUZyRlh6UmoKenJmVVd1YkJHdFRRQW5mUWFzUEdqeEx3VDQrdkFYNGJHQmpZa3dJREFRQUJBb0lCQURUT0xaeFNnUCsvZ3pwRwpPbVUwTWFUanFja3h0bEw0a2Q3QkwwNndDL2ppMVRpdXBaTUJZSXJQamlEZGEzNmsvbmcxWWR3NkxQVWNqa1ZpCm9NdVhUMUloaGNkZGd4SFFBSjJjWTgyYnJ0S1F3cWw4eDY3ZmpzelJnLzJBVk8yQ00vdU53SmRsN1RlUkNyTkwKY1FiWUJhNThpa1dKSDNrUU9Icm84d2R1cW1laVovMXpCWWZ1ZDFHaGRYT3kzUEVzWGtMNmxvd2hJdHdWZHExSQpCbXZuaEhIc1ZOYkpQNGxnanJ1WHNaakJhamQ1YWw5dkVJV2FOM2FVeVdKMXgyMW1UOXY1VG1tMG1TcGtGWm9yCmJ4RXN0TFNjdVRNQysza1RTS0tMeVF0VHAwTnJEU0ZhOUNBaFVrWE8yYXVRZnNrdVI5c0ZJaVI3ZFgxSUM0QVkKemg0bnJwa0NnWUVBL0daeXA0TFBrT0oxcmZ0L1V5a0xueTUwNzVFR3JpRW1lalJNbUFSNWQvdytSWkRYTDRaTgp5d2ludzNjOW1TN0p0NzZVRUMvSEkxSVNvYldvanhJNVVTbVdpSmdVYXZvbWdVQy9YZmRjK3kwd1FSWFpkUk9IClp4VUpOa0tZRUhwUGJyd3Q1dVd4Ukp3UXhiMzlzeWplUVQzS1dEemNqNGdseDNsS3d5Y0pBb1VDZ1lFQTNRWGEKaFpFN0YwY3pDM29rT2MzaCtNb0pyc3grWk44Ny9VOUczbGVJb1R0QXZLTi83eVhjK2dJYjBCVTdHQi9Vb3NLcgo4YlU0T25kNXlLQ3lMcEF3b1JJNDAveE9xcW1Qa2lUbFFpc3VTL3pWYlVhNFh1OUVIVWErUnJualhKNnEyaDdHCndoeVI0UldYVlJBcjRhM1pjUnR6d3g0ekw4K1lEeWNHWWJZQWRqY0NnWUJJNlg5dGpJaFJubG5JYk1LWFQyQWcKRjllSDdTazAzRGExVHE1aHE4azdOQTc1SWFKSUJGQXN1czliMC9KamNmU3JzODRwN3VOai9LMk5NV0VFRTR1agpPcFJWMlRqc3ZsNnBMLzhZTWdFV1BqT1dXYTE3K0t4QXh2N21RYzZUMUFGbVI4NHF5V2V3SGpWcUtqeERxU2FyClNpSk40eWNELzV5S1J5dWx2SDBKMFFLQmdIQ3hGbHo1MHA0bzBFN3V4Tit3S0tKWUtSMjE2RS80UGpjR244U24KN3VMK09pQzBZSHVIMjZhaFFwc1M2Q0dCd1VJSGJmSDhpeUhNWHd5N1duNUJTSG9udDAvbW1obU1BTWJzQnZSNAozYzhpcDVOaTlvaDVDRXJCRWkwdmhFeHFIZ1Mrb21yQWRHVEdSSFc3bkJRaU52YmpuMStCMjJscU9FYXBpQ2h6CnlzSjdBb0dBUE11dUwzYUxqVlI4QlFtckdmdWhwTlcwZGM1TndUcUxxMUJ0elB2bjJZL2p6TXRFTjVnQUROdWYKYnE2VGhscm52NDA2S1M5VTNQNEJqQWI0ODJ1cHlpazl3Wkc1UWdQQUZVZHRDT1JKTzBIRDlNZHdEZTArYi93RwpZSEczY0h6WEhXK21ZUnVJdnIxMFJybllEV0w4NDRTZjVpWFBrYUhLT1BYS0xDMU91YXM9Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==" />
+
+  <arg name="vehicle_id" default="8fbd37f9-c033-4b4d-81bf-533685b49bc6" />
+  <arg name="project_id" default="rAwaNfK1" />
+  <arg name="environment_id" default="04a1197f-5b32-454f-a1a8-c3b450751135" />
+
+  <!--arg name="oauth2_client_id" default="" />
+  <arg name="oauth2_subject_id" default="" />
+  <arg name="oauth2_private_key" default="" />
+
+  <arg name="vehicle_id" default="" />
+  <arg name="project_id" default="" />
+  <arg name="environment_id" default="" /-->
+
+  <node pkg="autoware_fms_status" exec="main">
+    <param name="oauth2_client_id" value="$(var oauth2_client_id)"/>
+    <param name="oauth2_subject_id" value="$(var oauth2_subject_id)"/>
+    <param name="oauth2_private_key" value="$(var oauth2_private_key)" />
+
+    <param name="vehicle_id" value="$(var vehicle_id)"/>
+    <param name="project_id" value="$(var project_id)"/>
+    <param name="environment_id" value="$(var environment_id)" />
+  </node>
+</launch>

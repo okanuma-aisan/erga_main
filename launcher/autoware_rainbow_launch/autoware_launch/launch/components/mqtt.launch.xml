@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <group>
+    <push-ros-namespace namespace="mqtt"/>
+
+    <include file="$(find-pkg-share tokairika_mqtt)/launch/tokairika_mqtt_mgrs.launch.xml"/>
+    
+    <include file="$(find-pkg-share pose_udp_pub)/launch/pose_udp_pub.launch.xml"/>
+    
+    <node pkg="ros2_detect_mqtt_pub" exec="ros2_detect_mqtt_pub" name="ros2_detect_mqtt_pub" output="log"/>
+  </group>
+</launch>

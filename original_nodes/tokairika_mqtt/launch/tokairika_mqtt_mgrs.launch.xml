@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="param_file" default="$(find-pkg-share tokairika_mqtt)/config/mgrs.param.yaml"/>
+
+  <arg name="topic_date" default="/sensing/gnss/novatel_oem7/date"/>
+  <arg name="topic_can501" default="/vehicle/wada_vmc/pedal/can501"/>
+  <arg name="topic_can502" default="/vehicle/wada_vmc/steer/can502"/>
+  <arg name="topic_curr_pos" default="/localization/pose_with_covariance"/>
+  <arg name="topic_curr_vel" default="/localization/pose_twist_fusion_filter/twist_with_covariance"/>
+  <arg name="topic_blinker" default="/vehicle/status/turn_indicators_status"/>
+
+  <group>
+    <push-ros-namespace namespace="tokai_rika"/>
+
+    <node pkg="tokairika_mqtt" exec="tokairika_mqtt_sub" name="tokairika_mqtt_sub" output="log">
+      <param from="$(var param_file)"/>
+    </node>
+
+    <node pkg="tokairika_mqtt" exec="tokairika_mqtt_pub_mgrs" name="tokairika_mqtt_pub" output="screen">
+      <remap from="topic_date" to="$(var topic_date)"/>
+      <remap from="topic_can501" to="$(var topic_can501)"/>
+      <remap from="topic_can502" to="$(var topic_can502)"/>
+      <remap from="topic_curr_pos" to="$(var topic_curr_pos)"/>
+      <remap from="topic_curr_vel" to="$(var topic_curr_vel)"/>
+      <remap from="topic_blinker" to="$(var topic_blinker)"/>
+
+      <param from="$(var param_file)"/>
+    </node>
+  </group>
+</launch>

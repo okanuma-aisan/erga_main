@@ -1,0 +1,20 @@
+/**:
+  ros__parameters:
+    can_update_time_th_sec: 0.3 #joy boardの情報更新がこの時間をすぎたらエラー判定にする
+
+    #joy board
+    joy_board_model: 20210103 #wada joy boardのバージョン
+    steering_can_value_left_to_tire_rad_slope: 3.99845295833998E-05 #CAN値からタイヤ角の変換係数(左傾き)
+    steering_can_value_left_to_tire_rad_intercept: 0.0 #CAN値からタイヤ角の変換係数(左切片)
+    steering_can_value_right_to_tire_rad_slope: 3.73609509281213E-05 #CAN値からタイヤ角の変換係数(右傾き)
+    steering_can_value_right_to_tire_rad_intercept: 0.0 #CAN値からタイヤ角の変換係数(右切片)
+    wheelrad_to_steering_can_value_left: 25009.6727514125
+    wheelrad_to_steering_can_value_right: 26765.9140133745
+    steer_ang_input_center: 0.0
+    steer_input_center: 0 #ステア中立値
+    steer_input_left_max: 15000 #ステア最大値(左)
+    steer_input_right_min: -15000 #ステア最小値(右)
+    pedal_input_center: 0 #ペダル中立値
+    pedal_input_accel_max: 450 #アクセル最大値
+    pedal_input_brake_min: -350 #ブレーキ最小値
+    velocity_magn: 0.467 #速度補正値 0.934 / 2

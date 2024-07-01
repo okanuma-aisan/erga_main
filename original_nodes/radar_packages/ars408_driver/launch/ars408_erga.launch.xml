@@ -1,0 +1,16 @@
+<launch>
+  <group>
+    <push-ros-namespace namespace="radar_left"/>
+    <include file="$(find-pkg-share pe_ars408_ros)/launch/continental_ars408_kvaser_leaf.launch.xml">
+      <arg name="hardware_id" value="101139" /> <!-- 101139:left , 101155: right -->
+      <arg name="output_frame" value="radar_front_left"/>
+    </include>
+  </group>
+  <group>
+    <push-ros-namespace namespace="radar_right"/>
+    <include file="$(find-pkg-share pe_ars408_ros)/launch/continental_ars408_kvaser_leaf.launch.xml">
+      <arg name="hardware_id" value="101155" /> <!-- 101139:left , 101155: right -->
+      <arg name="output_frame" value="radar_front_right"/>
+    </include>
+  </group>
+</launch>

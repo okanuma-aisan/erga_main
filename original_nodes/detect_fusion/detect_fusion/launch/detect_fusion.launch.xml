@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="in_lidar_detect" default="/perception/object_recognition/objects"/>
+  <arg name="in_mobileye_detect" default="/sensing/mobileye/obstacle_data"/>
+  <arg name="in_localizer_pose" default="/localization/pose_with_covariance"/>
+  <arg name="out_fusion_detect" default="/fusion_detect"/>
+
+  <arg name="param_file" default="$(find-pkg-share detect_fusion)/config/detect_fusion.param.yaml"/>
+
+  <node pkg="detect_fusion" exec="detect_fusion" name="detect_fusion" output="log">
+    <remap from="in_lidar_detect" to="$(var in_lidar_detect)"/>
+    <remap from="in_mobileye_detect" to="$(var in_mobileye_detect)"/>
+    <remap from="in_localizer_pose" to="$(var in_localizer_pose)"/>
+    <remap from="out_fusion_detect" to="$(var out_fusion_detect)"/>
+    <param from="$(var param_file)"/>
+  </node>
+</launch>

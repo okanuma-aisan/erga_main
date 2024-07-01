@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="map_projector_info_topic" default="/map/map_projector_info"/>
+  <arg name="input_kinematic_state_topic" default="/localization/kinematic_state"/>
+  <arg name="output_kinematic_state_topic" default="/localization/kinematic_state_gcs"/>
+  <arg name="output_kinematic_state_rpy_topic" default="/localization/kinematic_state_rpy"/>
+
+  <node pkg="mgrs_gcs_converter" exec="conversion_node">
+    <remap from="~/input_map_info" to="$(var map_projector_info_topic)"/>
+    <remap from="~/input_odometry_mgrs" to="$(var input_kinematic_state_topic)"/>
+    <remap from="~/output_odometry_gcs" to="$(var output_kinematic_state_topic)"/>
+    <remap from="~/output_odometry_rpy" to="$(var output_kinematic_state_rpy_topic)"/>
+  </node>
+</launch>

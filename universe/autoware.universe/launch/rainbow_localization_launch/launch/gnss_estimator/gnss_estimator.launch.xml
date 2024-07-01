@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <group>
+    <include file="$(find-pkg-share pose_twist_to_baselink)/launch/pose_twist_to_baselink.launch.xml">
+    </include>
+  </group>
+</launch>

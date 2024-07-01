@@ -1,0 +1,7 @@
+sudo apt install valgrind kcachegrind を実行
+
+CMakeListsのコンパイルオプションに -gp を追加
+
+colconでビルドタイプを -DCMAKE_BUILD_TYPE=RelWithDebInfo を指定
+
+node実行で--prefixで 'valgrind --tool=callgrind' を追加

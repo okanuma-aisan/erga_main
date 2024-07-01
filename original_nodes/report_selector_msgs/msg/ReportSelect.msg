@@ -1,0 +1,10 @@
+uint8 VRS_NONE=0 #速度レポートをpublishしない
+uint8 VRS_MAIN=1 #sub_velocity_report_main_でsubscribeしている速度レポートをautowareに渡す
+uint8 VRS_SUB=2  #sub_velocity_report_sub_でsubscribeしている速度レポートをautowareに渡す
+
+uint8 SRS_NONE=0 #タイヤ角レポートをpublishしない
+uint8 SRS_MAIN=1 #sub_steering_report_main_でsubscribeしているタイヤ角レポートをautowareに渡す
+uint8 SRS_SUB=2  #sub_steering_report_sub_でsubscribeしているタイヤ角レポートをautowareに渡す
+
+uint8 velocity_report_select 0 #mainとsubの速度レポートのどちらをautowareに渡すかのフラグ(VRS定数)
+uint8 steering_report_select 0 #mainとsubのタイヤ角レポートのどちらをautowareに渡すかのフラグ(VRS定数)

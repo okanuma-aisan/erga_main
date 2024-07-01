@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="offset_gmps" default="1.5"/>
+  <arg name="expect_gmps_delay_dist" default="0.2"/>
+  <arg name="th_association_dist_square" default="0.25"/>
+  <arg name="th_dist_double_marker" default="2.5"/>
+  <arg name="th_yaw_diff_double_marker" default="0.05"/>
+  <arg name="sigma_x_gmps" default="0.07"/>
+  <arg name="sigma_y_gmps" default="0.07"/>
+  <arg name="sigma_theta_gmps" default="0.1"/>
+  <arg name="marker_table_csv_name" default="/home/sit/autoware_erga/src/original_nodes/gmps_driver/DATA/sit_parking3.csv"/>
+  <!--arg name="prev_pose_name" default="/localization/pose_twist_fusion_filter/pose_with_covariance_without_yawbias"/-->
+  <!--arg name="prev_pose_name" default="/localization/gnss_pose_estimator/gnss_baselink_pose"/-->
+  <arg name="prev_pose_name" default="/localization/ekf_aichi_estimator/ekf_aichi_pose"/>
+  <arg name="gmps_detect_name" default="/sensing/gmps/gmps_detect"/>
+
+  <group>
+    <node pkg="gmps_localizer" exec="gmps_localizer" name="gmps_localizer" output="screen">
+      <param name="offset_gmps" value="$(var offset_gmps)"/>
+      <param name="expect_gmps_delay_dist" value="$(var expect_gmps_delay_dist)"/>
+      <param name="th_association_dist_square" value="$(var th_association_dist_square)"/>
+      <param name="sigma_x_gmps" value="$(var sigma_x_gmps)"/>
+      <param name="sigma_y_gmps" value="$(var sigma_y_gmps)"/>
+      <param name="sigma_theta_gmps" value="$(var sigma_theta_gmps)"/>
+      <param name="marker_table_csv_name" value="$(var marker_table_csv_name)"/>
+
+      <remap from="prev_pose" to="$(var prev_pose_name)"/>
+      <remap from="gmps_detect" to="$(var gmps_detect_name)"/>
+    </node>
+
+  </group>
+</launch>

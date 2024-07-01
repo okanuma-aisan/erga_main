@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="param_file" default="$(find-pkg-share novatel_oem7_driver)/config/default.param.yaml"/>
+
+  <arg name="serial" default="/dev/serial/by-id/usb-NovAtel_Inc._NovAtel_GPS_Receiver_DMMU18300133Z-if00-port0"/>
+  <arg name="baud" default="115200"/>
+
+  <group>
+    <push-ros-namespace namespace="novatel_oem7"/>
+
+    <node pkg="novatel_oem7_driver" exec="novatel_oem7_driver" name="novatel_oem7_driver" output="log">
+      <param name="serial" value="$(var serial)"/>
+      <param name="baud" value="$(var baud)"/>
+    </node>
+
+    <node pkg="novatel_oem7_driver" exec="novatel_sentence_to_navsatfix" name="novatel_sentence_to_navsatfix" output="log">
+    </node>
+  </group>
+</launch>

@@ -1,0 +1,10 @@
+camera_name: tier4-C1
+image_width: 1920
+image_height: 1280
+camera_name: camera
+camera_matrix: [2231.71798, 0.0, 908.22983, 0.0, 2213.71158, 646.68188, 0.0, 0.0, 1.0]
+distortion_model: plumb_bob
+distortion_coefficients: [-0.04297, 0.08744, 0.00157, -0.0061, 0.0]
+projection_matrix: [2220.23543, 0.0, 899.72654, 0.0, 0.0, 2212.89548, 648.12537, 0.0, 0.0, 0.0,
+    1.0, 0.0]
+rectification_matrix: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]

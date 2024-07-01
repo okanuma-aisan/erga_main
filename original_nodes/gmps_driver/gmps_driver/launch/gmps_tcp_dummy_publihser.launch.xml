@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="gmps_ip" default="192.168.1.21"/>
+  <arg name="gmps_port" default="9501"/>
+
+  <node pkg="gmps_driver" exec="gmps_tcp_dummy_publisher" name="gmps_tcp_dummy_publisher" output="screen" >
+    <param name="gmps_ip" value="$(var gmps_ip)"/>
+    <param name="gmps_port" value="$(var gmps_port)"/>
+  </node>
+</launch>

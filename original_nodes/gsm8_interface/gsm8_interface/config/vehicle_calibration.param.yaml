@@ -1,0 +1,4 @@
+/**:
+  ros__parameters:
+    speed_scale_factor: 1.0 # [-] speed scale factor
+    steering_offset: 0.0 # [rad] steering offset

@@ -1,0 +1,7 @@
+module traffic_light_signal_msgs {
+  module msg {
+    struct TrafficLightSignalArray {
+	sequence<traffic_light_signal_msgs::msg::TrafficLightSignal> array;
+    };
+  };
+};

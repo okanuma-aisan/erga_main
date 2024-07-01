@@ -1,0 +1,9 @@
+/**:
+  ros__parameters:
+    loop_rate: 50.0 # rate to publish commands [Hz]
+    wheel_base: 2.85 # wheel base of vehicle [m]
+    gain_LPF_vehicle_twist: 0.7 # gain value of low-pass filter
+    timeout_heartbeat: 0.5 # treat as error if heartbeat is not received for this value [sec]
+    heartbeat_window_size: 1000 # size of buffer to calculate rate
+    heartbeat_rate_error_threshold: 35 # treat as error if heartbeat rate is less than this value [Hz]
+    missing_heartbeat_error_threshold: 2.0 # treat as error if missing heartbeat rate is larger than this value [%]

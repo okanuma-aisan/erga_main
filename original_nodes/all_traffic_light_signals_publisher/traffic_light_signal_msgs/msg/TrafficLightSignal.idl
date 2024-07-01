@@ -1,0 +1,8 @@
+module traffic_light_signal_msgs {
+  module msg {
+    struct TrafficLightSignal {
+      int32 traffic_light_id;
+      int64 traffic_signal_id;
+    };
+  };
+};

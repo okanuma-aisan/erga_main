@@ -1,0 +1,2 @@
+/vehicle/status/steering_status: autoware_auto_vehicle_msgs/msg/SteeringReport
+

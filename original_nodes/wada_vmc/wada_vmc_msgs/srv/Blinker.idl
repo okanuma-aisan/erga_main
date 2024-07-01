@@ -1,0 +1,10 @@
+module wada_vmc_msgs {
+  module srv {
+    struct Blinker_Request {
+      uint8 blinker;
+    };
+    struct Blinker_Response {
+      boolean success;
+    };
+  };
+};

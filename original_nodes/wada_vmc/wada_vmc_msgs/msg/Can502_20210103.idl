@@ -1,0 +1,74 @@
+#include "builtin_interfaces/msg/Time.idl"
+
+module wada_vmc_msgs {
+  module msg {
+    module Can502_20210103_Constants {
+      const uint8 PULSE_MODE1 = 1;
+      const uint8 PULSE_MODE2 = 2;
+      const uint8 PULSE_MODE4 = 4;
+      const uint8 PULSE_MODE8 = 8;
+      const uint8 PULSE_MODE16 = 0;
+    };
+
+    struct Can502_20210103{
+      builtin_interfaces::msg::Time stamp;
+
+      @default (value=FALSE)
+      boolean auto_mode;//true:自動運転モード false:マニュアルモード
+
+      @default (value=1)
+      uint8 pulse_mode;//パルスモード  １：Ｐ１，２：Ｐ２，４：Ｐ４，８：Ｐ８，０：Ｐ１６
+      
+      @default (value=FALSE)
+      boolean write_permission_on;//書き込み許可線ON
+      
+      @default (value=FALSE)
+      boolean temperature_anomaly;//温度異常
+
+      @default (value=FALSE)
+      boolean over_current;//過電流
+
+      @default (value=FALSE)
+      boolean clutch;//クラッチスイッチ状態
+
+      @default (value=FALSE)
+      boolean brake_lock_set;//ブレーキロックセット(ハンドルでは未使用、常に０)
+
+      @default (value=FALSE)
+      boolean motor_disconnection;//モーター線断線
+
+      @default (value=FALSE)
+      boolean power_supply_voltage_drop;//電源電圧低
+
+      @default (value=FALSE)
+      boolean clutch_disconnection;//クラッチ線断線
+
+      @default (value=FALSE)
+      boolean mecha_potentiometer_disconnection;//メカポテンション断線
+
+      @default (value=FALSE)
+      boolean joy_disconnection;//ジョイスティック断線
+      
+      @default (value=0)
+      uint16 handle_pot_average;//ステアリング指令電圧データ  データ　0-2048　が0-5Vに対応
+      
+      @default (value=0.0)
+      float handle_pot_average_v;//steering_command_voltageを電圧値に変換した数値
+      
+      @default (value=0)
+      int16 steering_angle;//ステアリング角度  ＊２０　deg 表記
+      
+      @default (value=0.0)
+      float steering_angle_deg;//steering_angleをdegreeに変換したもの
+
+      @default (value=0.0)
+      float tire_angle_rad;//タイヤ角
+
+      @default (value=0)
+      uint16 velocity;//車両速度  km/h*100表記
+      
+      @default (value=0.0)
+      float velocity_kmh;//velocityをkm/hに変換したもの
+    };
+  };
+};

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>mobileye_node</name>
+  <version>0.0.0</version>
+  <description>The mobileyetest package</description>
+
+  <maintainer email="sonjunseong@todo.todo">sonjunseong</maintainer>
+  <maintainer email="sonjunseong@todo.todo">shinkansan</maintainer>
+
+  <license>TODO</license>
+
+  <build_depend>std_msgs</build_depend>
+  <exec_depend>std_msgs</exec_depend>
+  
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

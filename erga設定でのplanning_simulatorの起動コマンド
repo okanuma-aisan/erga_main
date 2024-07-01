@@ -1,0 +1,1 @@
+ros2 launch autoware_launch planning_simulator_erga.launch.xml map_path:=/home/sit/load_data/okabe/pcd/create_wan lanelet2_map_file:=sit_lanelet2_erga_ver9_3.osm pointcloud_map_file:=0.5_all.pcd vehicle_model:=erga_vehicle sensor_model:=erga_sensor_kit

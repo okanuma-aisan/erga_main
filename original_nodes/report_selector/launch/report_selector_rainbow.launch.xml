@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <group>
+    <!--push-ros-namespace namespace="report_selector"/-->
+
+    <node pkg="report_selector" exec="report_selector" name="report_selector" output="screen">
+      <remap from="gpgga_main" to="/sensing/gnss/novatel_oem7/gpgga"/>
+      <remap from="input_velocity_report_main" to="/localization/twist_estimator/velocity_report"/>
+      <remap from="input_velocity_report_sub" to="/vehicle/velocity_status"/>
+      <remap from="output_velocity_report" to="/vehicle/status/velocity_status"/>
+
+      <remap from="input_steering_report_main" to="/vehicle/steering_status"/>
+      <!--remap from="input_steering_report_main" to="/aaa"/-->
+      <remap from="output_steering_report" to="/vehicle/status/steering_status"/>
+      
+      <param from="$(find-pkg-share report_selector)/config/rainbow.param.yaml" />
+    </node>
+  </group>
+</launch>

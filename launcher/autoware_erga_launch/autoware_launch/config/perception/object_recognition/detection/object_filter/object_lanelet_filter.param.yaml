@@ -1,0 +1,11 @@
+/**:
+  ros__parameters:
+    filter_target_label:
+      UNKNOWN : true
+      CAR : false
+      TRUCK : true
+      BUS : true
+      TRAILER : false
+      MOTORCYCLE : true
+      BICYCLE : true
+      PEDESTRIAN : false

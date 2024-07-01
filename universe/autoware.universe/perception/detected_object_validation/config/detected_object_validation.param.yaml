@@ -1,0 +1,5 @@
+/**:
+  ros__parameters:
+    min_points_num: 50
+    max_points_num: 50
+    decision_mobileye: False

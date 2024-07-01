@@ -1,0 +1,19 @@
+#include "builtin_interfaces/msg/Time.idl"
+
+module wada_vmc_msgs {
+  module msg {
+    module CanBuffer_Constants {
+      const uint8 DATA_LENGHT = 8;
+    };
+
+    struct CanBuffer
+    {
+      builtin_interfaces::msg::Time stamp;
+
+      @default (value=0)
+      int64 message_id;
+
+      uint8 receive_data[8];
+    };
+  };
+};

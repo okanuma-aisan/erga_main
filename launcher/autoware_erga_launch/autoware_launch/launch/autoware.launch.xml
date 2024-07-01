@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <!-- Essential parameters -->
+  <arg name="map_path" description="point cloud and lanelet2 map directory path"/>
+  <arg name="vehicle_model" description="vehicle model name"/>
+  <arg name="sensor_model" description="sensor model name"/>
+  <arg name="use_pointcloud_container" default="true" description="launch pointcloud container"/>
+  <arg name="pointcloud_container_name" default="pointcloud_container"/>
+  <arg name="data_path" default="$(env HOME)/autoware_data" description="packages data and artifacts directory path"/>
+
+  <!-- Optional parameters -->
+  <!-- Modules to be launched -->
+  <arg name="launch_mqtt" default="true" description="launch mqtt"/>
+  <arg name="launch_can" default="true" description="launch can"/>
+  <arg name="launch_vehicle" default="true" description="launch vehicle"/>
+  <arg name="launch_system" default="true" description="launch system"/>
+  <arg name="launch_map" default="true" description="launch map"/>
+  <arg name="launch_sensing" default="true" description="launch sensing"/>
+  <arg name="launch_sensing_driver" default="true" description="launch sensing driver"/>
+  <arg name="launch_localization" default="true" description="launch localization"/>
+  <arg name="launch_perception" default="true" description="launch perception"/>
+  <arg name="launch_planning" default="true" description="launch planning"/>
+  <arg name="launch_control" default="true" description="launch control"/>
+  <!-- Global parameters -->
+  <arg name="use_sim_time" default="false" description="use_sim_time"/>
+  <!-- Vehicle -->
+  <arg name="vehicle_id" default="$(env VEHICLE_ID default)" description="vehicle specific ID"/>
+  <arg name="launch_vehicle_interface" default="true" description="launch vehicle interface"/>
+  <!-- Control -->
+  <arg name="check_external_emergency_heartbeat" default="false"/>
+  <!-- Map -->
+  <arg name="lanelet2_map_file" default="lanelet2_map.osm" description="lanelet2 map file name"/>
+  <arg name="pointcloud_map_file" default="pointcloud_map.pcd" description="pointcloud map file name"/>
+  <!-- System -->
+  <arg name="system_run_mode" default="online" description="run mode in system"/>
+  <arg name="launch_system_monitor" default="true" description="launch system monitor"/>
+  <arg name="launch_dummy_diag_publisher" default="false" description="launch dummy diag publisher"/>
+  <arg name="system_error_monitor_param_path" default="$(find-pkg-share autoware_erga_launch)/config/system/system_error_monitor/system_error_monitor.param.yaml"/>
+  <!-- Tools -->
+  <arg name="rviz" default="true" description="launch rviz"/>
+  <arg name="rviz_config" default="$(find-pkg-share autoware_erga_launch)/rviz/autoware.rviz" description="rviz config"/>
+  <arg name="rviz_respawn" default="true"/>
+  <!-- Perception -->
+  <arg name="perception_mode" default="lidar_mobileye" description="select perception mode. camera_lidar_radar_fusion, camera_lidar_fusion, lidar_radar_fusion, lidar, radar"/> <!--lidar_mobileye-->
+  <arg name="traffic_light_recognition/enable_fine_detection" default="True" description="enable traffic light fine detection"/>
+  <arg name="use_traffic_light_recognition" default="true"/>
+  <arg name="use_traffic_light_yolov5_detector" default="false" description="set false if unuse traffic_light_yolov5_detector"/>
+  <arg name="use_nshinjuku_traffic_signal" default="true"/>
+  <arg name="enable_traffic_light_fine_detector_classifier" default="false"/>
+  <arg name="enable_occlusion_predictor" default="false"/>
+  <arg name="enable_traffic_signal_safety_guard" default="false"/>
+  <arg name="use_crosswalk_traffic_light_estimator" default="false"/>
+  <arg name="traffic_light_image_number" default="2"/>
+
+  <!-- Global parameters -->
+  <group scoped="false">
+    <include file="$(find-pkg-share global_parameter_loader)/launch/global_params.launch.py">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="vehicle_model" value="$(var vehicle_model)"/>
+    </include>
+  </group>
+
+  <!-- Can -->
+  <group if="$(var launch_can)">
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/components/can.launch.xml"/>
+  </group>
+
+  <!-- MQTT -->
+  <group if="$(var launch_mqtt)">
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/components/mqtt.launch.xml"/>
+  </group>
+
+  <!-- Pointcloud container -->
+  <group if="$(var use_pointcloud_container)">
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/pointcloud_container.launch.py">
+      <arg name="use_multithread" value="true"/>
+      <arg name="container_name" value="$(var pointcloud_container_name)"/>
+    </include>
+  </group>
+
+  <!-- Vehicle -->
+  <group if="$(var launch_vehicle)">
+    <include file="$(find-pkg-share tier4_vehicle_launch)/launch/vehicle.launch.xml">
+      <arg name="vehicle_model" value="$(var vehicle_model)"/>
+      <arg name="sensor_model" value="$(var sensor_model)"/>
+      <arg name="vehicle_id" value="$(var vehicle_id)"/>
+      <arg name="launch_vehicle_interface" value="$(var launch_vehicle_interface)"/>
+      <arg name="config_dir" value="$(find-pkg-share individual_params)/config/$(var vehicle_id)/$(var sensor_model)"/>
+    </include>
+  </group>
+
+  <!-- System -->
+  <group if="$(var launch_system)">
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/components/tier4_system_component.launch.xml"/>
+  </group>
+
+  <!-- Map -->
+  <group if="$(var launch_map)">
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/components/tier4_map_component.launch.xml"/>
+  </group>
+
+  <!-- Sensing -->
+  <group if="$(var launch_sensing)">
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/components/tier4_sensing_component.launch.xml"/>
+  </group>
+
+  <!-- Localization -->
+  <group if="$(var launch_localization)">
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/components/tier4_localization_component.launch.xml"/>
+  </group>
+
+  <!-- Perception -->
+  <group if="$(var launch_perception)">
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/components/tier4_perception_component.launch.xml">
+      <arg name="data_path" value="$(var data_path)"/>
+      <arg name="perception_mode" value="$(var perception_mode)"/>
+      <arg name="use_empty_dynamic_object_publisher" value="false"/>
+    </include>
+  </group>
+
+  <!-- Planning -->
+  <group if="$(var launch_planning)">
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/components/tier4_planning_component.launch.xml"/>
+  </group>
+
+  <!-- Control -->
+  <group if="$(var launch_control)">
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/components/tier4_control_component.launch.xml"/>
+  </group>
+
+  <!-- API -->
+  <group>
+    <include file="$(find-pkg-share autoware_erga_launch)/launch/components/tier4_autoware_api_component.launch.xml"/>
+  </group>
+
+  <group>
+    <include file="$(find-pkg-share tier4_debug_tools)/launch/lateral_error_publisher.launch.xml"/>
+  </group>
+
+  <!-- Tools -->
+  <group>
+    <node
+      pkg="rviz2"
+      exec="rviz2"
+      name="rviz2"
+      output="screen"
+      args="-d $(var rviz_config) -s $(find-pkg-share autoware_erga_launch)/rviz/image/autoware.png"
+      if="$(var rviz)"
+      respawn="$(var rviz_respawn)"
+    />
+  </group>
+
+  <!-- rosbridge_suite -->
+  <!-- 2023/10/25 16:14 Added by Yuugo Takano -->
+  <group>
+    <include file="$(find-pkg-share rosbridge_server)/launch/rosbridge_websocket_launch.xml"/>
+    
+    <!-- FMS to ROS2, MGRS to GCS conversion nodes for status signage 2023/12/24 Miyajima -->
+    <include file="$(find-pkg-share autoware_fms_status)/launch/erga.launch.xml">
+      <arg name="oauth2_client_id" value="xyC7A93N3SsoHDrYUWDDfj" />
+      <arg name="oauth2_subject_id" value="t4:c18cf411-b5df-4738-a7df-21a336a98904" />
+      <arg name="oauth2_private_key" value="LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBMmVvMmJjYy9QZzIvOStZbmpJOFB4RCtldHRMZlpvVlROMU1JMlFjZW1DOU1LSjY0CmVHNVJOdzBPWHAzUnpTcHQ3TUFlTTg5V1J6MzRsWHBtdURBRkRYbEV1OERJNkU0UE5nQnhJUjQ3VTBDaytaZG0KbVBjdFdmQWVheU5UV25lSmMwMGkwa2EyTmdtOW42dDQ4Ny9xY0pXNzJLaGZWZ2JrVnlLTFAvRlVDYkUyS0pEYworbEJ4cFpYUk1NZWZCUGs1SEZmREZQV0d3eEhkRUs5TDdrTlRRV2dBYnVPZ1FSbXJFMGc2NFdRbnlWbDRoSWVICjJHK1lGdlhTb3hKWU1lQnVmWWlSdmtSRy81bEExOVpETW93bGdzMGxSaFhYZm1YOVFVVFFVL0djVUZyRlh6UmoKenJmVVd1YkJHdFRRQW5mUWFzUEdqeEx3VDQrdkFYNGJHQmpZa3dJREFRQUJBb0lCQURUT0xaeFNnUCsvZ3pwRwpPbVUwTWFUanFja3h0bEw0a2Q3QkwwNndDL2ppMVRpdXBaTUJZSXJQamlEZGEzNmsvbmcxWWR3NkxQVWNqa1ZpCm9NdVhUMUloaGNkZGd4SFFBSjJjWTgyYnJ0S1F3cWw4eDY3ZmpzelJnLzJBVk8yQ00vdU53SmRsN1RlUkNyTkwKY1FiWUJhNThpa1dKSDNrUU9Icm84d2R1cW1laVovMXpCWWZ1ZDFHaGRYT3kzUEVzWGtMNmxvd2hJdHdWZHExSQpCbXZuaEhIc1ZOYkpQNGxnanJ1WHNaakJhamQ1YWw5dkVJV2FOM2FVeVdKMXgyMW1UOXY1VG1tMG1TcGtGWm9yCmJ4RXN0TFNjdVRNQysza1RTS0tMeVF0VHAwTnJEU0ZhOUNBaFVrWE8yYXVRZnNrdVI5c0ZJaVI3ZFgxSUM0QVkKemg0bnJwa0NnWUVBL0daeXA0TFBrT0oxcmZ0L1V5a0xueTUwNzVFR3JpRW1lalJNbUFSNWQvdytSWkRYTDRaTgp5d2ludzNjOW1TN0p0NzZVRUMvSEkxSVNvYldvanhJNVVTbVdpSmdVYXZvbWdVQy9YZmRjK3kwd1FSWFpkUk9IClp4VUpOa0tZRUhwUGJyd3Q1dVd4Ukp3UXhiMzlzeWplUVQzS1dEemNqNGdseDNsS3d5Y0pBb1VDZ1lFQTNRWGEKaFpFN0YwY3pDM29rT2MzaCtNb0pyc3grWk44Ny9VOUczbGVJb1R0QXZLTi83eVhjK2dJYjBCVTdHQi9Vb3NLcgo4YlU0T25kNXlLQ3lMcEF3b1JJNDAveE9xcW1Qa2lUbFFpc3VTL3pWYlVhNFh1OUVIVWErUnJualhKNnEyaDdHCndoeVI0UldYVlJBcjRhM1pjUnR6d3g0ekw4K1lEeWNHWWJZQWRqY0NnWUJJNlg5dGpJaFJubG5JYk1LWFQyQWcKRjllSDdTazAzRGExVHE1aHE4azdOQTc1SWFKSUJGQXN1czliMC9KamNmU3JzODRwN3VOai9LMk5NV0VFRTR1agpPcFJWMlRqc3ZsNnBMLzhZTWdFV1BqT1dXYTE3K0t4QXh2N21RYzZUMUFGbVI4NHF5V2V3SGpWcUtqeERxU2FyClNpSk40eWNELzV5S1J5dWx2SDBKMFFLQmdIQ3hGbHo1MHA0bzBFN3V4Tit3S0tKWUtSMjE2RS80UGpjR244U24KN3VMK09pQzBZSHVIMjZhaFFwc1M2Q0dCd1VJSGJmSDhpeUhNWHd5N1duNUJTSG9udDAvbW1obU1BTWJzQnZSNAozYzhpcDVOaTlvaDVDRXJCRWkwdmhFeHFIZ1Mrb21yQWRHVEdSSFc3bkJRaU52YmpuMStCMjJscU9FYXBpQ2h6CnlzSjdBb0dBUE11dUwzYUxqVlI4QlFtckdmdWhwTlcwZGM1TndUcUxxMUJ0elB2bjJZL2p6TXRFTjVnQUROdWYKYnE2VGhscm52NDA2S1M5VTNQNEJqQWI0ODJ1cHlpazl3Wkc1UWdQQUZVZHRDT1JKTzBIRDlNZHdEZTArYi93RwpZSEczY0h6WEhXK21ZUnVJdnIxMFJybllEV0w4NDRTZjVpWFBrYUhLT1BYS0xDMU91YXM9Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==" />
+
+      <arg name="vehicle_id" value="8fbd37f9-c033-4b4d-81bf-533685b49bc6" />
+      <arg name="project_id" value="rAwaNfK1" />
+      <arg name="environment_id" value="04a1197f-5b32-454f-a1a8-c3b450751135" /> 
+    </include>
+
+    <include file="$(find-pkg-share mgrs_gcs_converter)/launch/convert_autoware.launch.xml"/>
+  </group>
+  
+  <!-- Radar preview 2023/12/24 Miyajima TODO: Add to autoware perception suite, radar perception fusion nodes already available-->
+  <include file="$(find-pkg-share pe_ars408_ros)/launch/ars408_erga.launch.xml"/>
+  
+  <!-- automatic topic logger 2023/12/24 Miyajima -->
+  <include file="$(find-pkg-share auto_csv_logger)/launch/erga.launch.xml">
+    <arg name="log_path" value="/home/sit/csv_logger" />
+    <arg name="log_trigger_topic" value="/vehicle/contec/log_trigger" />
+    <arg name="log_topics" value="/vehicle/wada_vmc/steer/steer_clutch;/vehicle/wada_vmc/pedal/pedal_clutch;/sensing/gnss/novatel_oem7/surface_speed;/vehicle/status/velocity_status;/localization/pose_twist_fusion_filter/debug_ekf_log" />
+  </include>
+
+  <!-- nshinjuku traffic signal info receiver 2023/12/24 Miyajima TODO: move back to autoware_erga_perception launch files -->
+  <group if="$(var use_nshinjuku_traffic_signal)">
+    <include file="$(find-pkg-share nshinjuku_traffic_signal)/launch/autoware.launch.xml">
+      <arg name="lanelet2_map_file" value="$(var map_path)/$(var lanelet2_map_file)"/>
+    </include>
+  </group>
+
+</launch>

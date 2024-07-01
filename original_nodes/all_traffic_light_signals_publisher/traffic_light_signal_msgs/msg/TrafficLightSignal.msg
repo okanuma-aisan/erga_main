@@ -1,0 +1,2 @@
+int32 traffic_light_id
+int64 traffic_signal_id

@@ -1,0 +1,104 @@
+#include "builtin_interfaces/msg/Time.idl"
+
+module wada_vmc_msgs {
+  module msg {
+    module Can501_20210103_Constants {
+      const uint8 STEER_MODE_UNESTABLISHED = 5;
+      const uint8 STEER_V0 = 0;
+      const uint8 STEER_AUTO = 10;
+      const uint8 STEER_NOT_V0 = 4;
+      const uint8 STEER_NOT_JOY_CENTER = 1;
+      const uint8 STEER_NOT_BOARD_RES = 8;
+
+      const uint8 DRIVE_MODE_UNESTABLISHED = 5;
+      const uint8 DRIVE_V0 = 0;
+      const uint8 DRIVE_AUTO = 11;
+      const uint8 DRIVE_NOT_V0 = 4;
+      const uint8 DRIVE_NOT_JOY_CENTER = 1;
+      const uint8 DRIVE_NOT_BOARD_RES = 8;
+      
+      const uint8 EMERGENCY_BRAKE_OFF = 0;
+      const uint8 EMERGENCY_BRAKE_ON = 2;
+      const uint8 EMERGENCY_BRAKE_ERROR = 1;
+
+      const uint8 PULSE_MODE1 = 1;
+      const uint8 PULSE_MODE2 = 2;
+      const uint8 PULSE_MODE4 = 4;
+      const uint8 PULSE_MODE8 = 8;
+      const uint8 PULSE_MODE16 = 0;
+    };
+
+    struct Can501_20210103 {
+      builtin_interfaces::msg::Time stamp;
+
+      @default (value=0)
+      uint8 drive_mode;//drive autoフラグ 0はV0 10はAUTO それ以外はエラー
+
+      @default (value=0)
+      uint8 steer_mode;//steer autoフラグ 0はV0 10はAUTO それ以外はエラー
+
+      @default (value=TRUE)
+      boolean first_lock;//初期ロック状態
+
+      @default (value=0)
+      uint8 steer_auto_answer_back;//steer auto アンサーバック
+
+      @default (value=0)
+      uint8 pedal_auto_answer_back;//pedal auto アンサーバック
+
+      @default (value=0)
+      int16 steer_reply;//steer入力値の返答値
+
+      @default (value=0)
+      int16 pedal_reply;//pedal入力値の返答値
+
+      @default (value=0)
+      uint8 emergency_brake;//緊急ブレーキ
+
+      @default (value=FALSE)
+      boolean engine_start;//エンジン始動
+
+      @default (value=FALSE)
+      boolean ignition;//イグニション
+
+      @default (value=FALSE)
+      boolean shift_bottom;//シフトボタン化状態
+
+      @default (value=FALSE)
+      boolean accel_intervention;//アクセル介入判定
+
+      @default (value=FALSE)
+      boolean right_blinker;//右ウィンカー点滅状態
+
+      @default (value=FALSE)
+      boolean left_blinker;//左ウィンカー点滅状態
+
+      @default (value=FALSE)
+      boolean log_start;//log記録開始フラグ(ステア・ペダル・シフト・ウインカーメイン監視)
+
+      @default (value=FALSE)
+      boolean auto_drive_ok;//自動運転可否(すす燃焼状態(DBS)他)
+
+      @default (value=FALSE)
+      boolean shift_d;//シフトボタンD押下(DIN0=1&DIN7=1)
+
+      @default (value=FALSE)
+      boolean shift_n;//シフトボタンN押下(DIN0=1&DIN7=1)
+
+      @default (value=FALSE)
+      boolean shift_r;//シフトボタンR押下(DIN0=1&DIN7=1)
+
+      @default (value=FALSE)
+      boolean shift_auto;//シフト自動化状態(DIN7=1) 決定 (DIN7=0)
+
+      @default (value=FALSE)
+      boolean curse_velocity_plus;//クルーズコントロール速度+
+
+      @default (value=FALSE)
+      boolean curse_velocity_minus;//クルーズコントロール速度-
+
+      @default (value=FALSE)
+      boolean distance_between_two_cars;//車間距離変更
+    };
+  };
+};

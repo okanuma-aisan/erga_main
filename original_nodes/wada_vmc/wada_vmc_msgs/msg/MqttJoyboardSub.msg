@@ -1,0 +1,14 @@
+float64 linear_velocity
+float64 steering_angle
+int32 blinker
+int16 accel_storke_cap
+float64 local_way_max_vel_mps
+float64 lat_std_dev
+float64 lon_std_dev
+float64 alt_std_dev
+float64 baselink_distance
+float64 baselink_angular
+int32 localizer_select
+bool use_safety_localizer
+int16 accel_stroke_cap_temporary_stopper
+int16 accel_stroke_cap_mobileye

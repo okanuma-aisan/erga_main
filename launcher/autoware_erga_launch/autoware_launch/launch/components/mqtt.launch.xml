@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <group>
+    <push-ros-namespace namespace="mqtt"/>
+
+    <include file="$(find-pkg-share tokairika_mqtt)/launch/tokairika_mqtt_mgrs.launch.xml"/>
+  </group>
+</launch>

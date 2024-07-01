@@ -1,0 +1,4 @@
+/**:
+  ros__parameters:
+    car_center_from_imu_x: 1.83584337349398 #imuからの重心位置(x)
+    car_center_from_imu_y: 3.46415662650602 #imuからの重心位置(y)

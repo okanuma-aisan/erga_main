@@ -1,0 +1,31 @@
+#include "builtin_interfaces/msg/Time.idl"
+
+module novatel_oem7_msgs {
+  module msg {
+    
+    struct InsVelUser {
+      builtin_interfaces::msg::Time stamp;
+
+      @default (value=0.0)
+      double x_axis_velocity;//x軸の速度
+
+      @default (value=0.0)
+      double y_axis_velocity;//y軸の速度
+
+      @default (value=0.0)
+      double z_axis_velocity;//z軸の速度
+
+      @default (value=0.0)
+      float x_axis_velocity_stdev;//x軸の速度の誤差
+
+      @default (value=0.0)
+      float y_axis_velocity_stdev;//y軸の速度の誤差
+
+      @default (value=0.0)
+      float z_axis_velocity_stdev;//z軸の速度の誤差
+
+      @default (value=0.0)
+      float slip_angle;//スリップアングル
+    };
+  };
+};

@@ -1,0 +1,31 @@
+/**:
+  ros__parameters:
+    forcibly: false #このフラグがtrueの場合、強制的にpermission okにする
+
+    use_ndt_tp: true #ndt精度(transform_probability)しきい値を使用するか？
+    use_ndt_nvtl: true #ndt精度(nearest_voxel_transformation_likelihood)しきい値を使用するか？
+    ndt_tp_min: 1.5 #ndt精度(transform_probability)しきい値
+    ndt_nvtl_max: 5.0 #ndt精度(nearest_voxel_transformation_likelihood)しきい値
+    ndt_nvtl_min: 1.5 #ndt精度(nearest_voxel_transformation_likelihood)しきい値
+    ndt_tp_over_count_th: 3 #ndt精度(transform_probability)低下がこの回数発生したらエラー
+    ndt_nvtl_over_count_th: 3 #ndt精度低下がこの回数発生したらエラー
+
+    use_gnss_dev: false #true #gnss devを使用するか？
+    gnss_lat_dev_th: 0.12 #gnss latしきい値
+    gnss_lon_dev_th: 0.12 #gnss lonしきい値
+    gnss_alt_dev_th: 0.15 #gnss altしきい値
+
+    use_kinematic_time_diff: true #車両位置更新時間しきい値を使用するか？
+    kinematic_time_diff_th: 0.2 #車両位置更新時間しきい値
+
+    use_position_and_path: false #車両位置と経路の関係を使用するか？
+    use_angle_and_path: false #車両向きと経路の関係を使用するか？
+    position_and_path_distance_th: 1.5 #車両位置と経路との距離しきい値
+    position_and_path_angular_th_deg: 10.0 #車両位置と経路との向きしきい値
+    position_distance_count_th: 3 #経路との誤差がこの回数発生したらエラー
+
+    use_trajectory_time_diff: true #経路(Trajectory)置更新時間しきい値を使用するか？
+    trajectory_time_diff_th: 0.55 #0.4 #経路(Trajectory,Path)置更新時間しきい値
+
+    use_handle_mode: true #ハンドルがAUTOモードかを確認するか？
+    use_pedal_mode: true #ペダルがAUTOモードかを確認するか？

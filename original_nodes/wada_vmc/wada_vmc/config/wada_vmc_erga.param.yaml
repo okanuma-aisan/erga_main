@@ -1,0 +1,28 @@
+/**:
+  ros__parameters:
+    can_update_time_th_sec: 0.3 #joy boardの情報更新がこの時間をすぎたらエラー判定にする
+
+    #joy board
+    joy_board_model: 20221111 #wada joy boardのバージョン
+    steering_can_value_left_to_tire_rad_slope: 0.000873527 #0.000926189 #CAN値からタイヤ角の変換係数(左傾き)
+    steering_can_value_left_to_tire_rad_intercept: 0.0 #0.050007438 #CAN値からタイヤ角の変換係数(左切片)
+    steering_can_value_right_to_tire_rad_slope: 0.000901032 #0.000887424 #CAN値からタイヤ角の変換係数(右傾き)
+    steering_can_value_right_to_tire_rad_intercept: 0.0 #0.031315874 #CAN値からタイヤ角の変換係数(右切片)
+    tire_rad_to_steering_can_value_left_slope: 1144.208532 #1079.164926 #タイヤ角からCAN値の変換係数(左傾き)
+    tire_rad_to_steering_can_value_left_intercept: 0.0 #-27.63333633 #タイヤ角からCAN値の変換係数(左切片)
+    tire_rad_to_steering_can_value_right_slope: 1109.054568 #1126.746545 #タイヤ角からCAN値の変換係数(右傾き)
+    tire_rad_to_steering_can_value_right_intercept: 0.0 #-35.33024986 #タイヤ角からCAN値の変換係数(右切片)
+    steer_input_left_max: 2000 #1941 #ステア最大値(左)
+    steer_input_right_min: 100 #0 #ステア最小値(右)
+    steer_input_center: 1024 #1042 #1038 #1054 #ステア中立値
+    steer_input_correction_receive: -18 #ステア補正値(受信側)
+    steer_input_correction_send: 18 #ステア補正値(送信側)
+    pedal_input_brake_max: 1500 #ブレーキ最大値
+    pedal_input_accel_min: 100 #アクセル最小値
+    pedal_input_center: 1024 #ペダル中立値
+    accel_scale_factor: 2.740672135
+    brake_scale_factor: 1.30951943
+    cmd_brake_scale_factor: 1.2
+
+    #ステア操作
+    use_beta: false #横滑り角を使用するか？

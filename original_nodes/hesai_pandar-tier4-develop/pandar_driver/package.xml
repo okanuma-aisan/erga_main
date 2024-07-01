@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>pandar_driver</name>
+  <version>0.0.0</version>
+  <description>
+    ROS driver for Hesai LiDARSs.
+  </description>
+  <maintainer email="shinnosuke.hirakawa@tier4.jp">hirakawa</maintainer>
+  <license>Apache 2</license>
+
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+  <depend>pandar_msgs</depend>
+  <depend>pandar_api</depend>
+  
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

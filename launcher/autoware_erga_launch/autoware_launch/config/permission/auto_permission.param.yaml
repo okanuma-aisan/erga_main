@@ -1,0 +1,20 @@
+/**:
+  ros__parameters:
+    use_ndt_transform_probability: true #ndt精度しきい値を使用するか？
+    ndt_transform_probability_min: 2.5 #ndt精度しきい値
+    ndt_over_count_th: 3 #ndt精度低下がこの回数発生したらエラー
+
+    use_gnss_dev: true #gnss devを使用するか？
+    gnss_lat_dev_th: 0.12 #gnss latしきい値
+    gnss_lon_dev_th: 0.12 #gnss lonしきい値
+    gnss_alt_dev_th: 0.15 #gnss altしきい値
+
+    use_kinematic_time_diff: true #車両位置更新時間しきい値を使用するか？
+    kinematic_time_diff_th: 0.2 #車両位置更新時間しきい値
+
+    use_position_and_path: true #車両位置と経路の関係を使用するか？
+    position_and_path_distance_th: 1.0 #車両位置と経路との距離しきい値
+    position_and_path_angular_th_deg: 20.0 #車両位置と経路との向きしきい値
+
+    use_handle_mode: true #ハンドルがAUTOモードかを確認するか？
+    use_pedal_mode: true #ペダルがAUTOモードかを確認するか？

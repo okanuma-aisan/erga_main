@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="pose_topic" default="/sensing/gnss/pose_with_covariance"/>
+  <arg name="twist_topic" default="/sensing/gnss/novatel_oem7/odometry"/>
+  <arg name="pose_topic_rtkpos" default="/sensing/gnss/rtkpos/pose_with_covariance"/>
+  <arg name="twist_topic_rtkpos" default="/sensing/gnss/rtkpos/twist_with_covariance"/>
+  <arg name="tf_name" default="gnss_base_link"/>
+
+  <node pkg="pose_twist_to_baselink" exec="pose_twist_to_baselink" name="pose_twist_to_baselink" output="log">
+    <param name="tf_name" value="$(var tf_name)"/>
+    <remap from="input_pose" to="$(var pose_topic)"/>
+    <remap from="input_twist" to="$(var twist_topic)"/>
+    <remap from="input_imu" to="/sensing/imu/imu_data"/>
+  </node>
+
+  <!--group>
+    <push-ros-namespace namespace="rtk"/>
+    <node pkg="pose_twist_to_baselink" exec="pose_twist_to_baselink" name="pose_twist_to_baselink_rtkpos" output="log">
+      <param name="tf_name" value="gnss_rtk_base_link"/>
+      <remap from="input_pose" to="$(var pose_topic_rtkpos)"/>
+      <remap from="input_twist" to="$(var twist_topic_rtkpos)"/>
+      <remap from="gnss_baselink_pose" to="gnss_baselink_rtk_pose"/>
+    </node>
+  </group-->
+</launch>

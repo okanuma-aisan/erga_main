@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="in_vel_can" default="/vehicle/vcan/velocity_report"/>
+  <arg name="in_vel_gnss" default="/sensing/gnss/novatel_oem7/velocity_report"/>
+  <arg name="in_gnss_solution" default="/sensing/gnss/novatel_oem7/solution"/>
+  <arg name="out_vel" default="/vehicle/status/velocity_status"/>
+
+  <group>
+    <!--push-ros-namespace namespace="report_selector"/-->
+
+    <node pkg="report_selector" exec="velocity_report_selector" name="velocity_report_selector" output="log">
+      <remap from="in_vel_can" to="$(var in_vel_can)"/>
+      <remap from="in_vel_gnss" to="$(var in_vel_gnss)"/>
+      <remap from="in_gnss_solution" to="$(var in_gnss_solution)"/>
+      <remap from="out_vel" to="$(var out_vel)"/>
+    </node>
+  </group>
+</launch>

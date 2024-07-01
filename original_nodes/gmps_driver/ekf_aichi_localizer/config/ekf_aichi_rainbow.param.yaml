@@ -1,0 +1,38 @@
+/**:
+  ros__parameters:
+    stability_factor: 0.001 #スタビリティ・ファクター
+    Kbeta0: -0.0173 #横滑り係数
+
+    # kalman filter config
+    timer_freq: 50.0
+    # measurement noise
+    sigma_x_ndt: 0.27 #NDTのx寄与率
+    sigma_y_ndt: 0.27 #NDTのy寄与率
+    sigma_theta_ndt: 0.1 #NDTのyaw寄与率
+    sigma_x_gnss: 0.135 #GNSSのx寄与率
+    sigma_y_gnss: 0.135 #GNSSのy寄与率
+    sigma_theta_gnss: 0.05 #GNSSのyaw寄与率
+    sigma_x_gmps: 0.07 #GMPSのx寄与率
+    sigma_y_gmps: 0.07 #GMPSのy寄与率
+    sigma_theta_gmps: 0.3 #GMPSのyaw寄与率
+
+    # process noise
+    sigma_v: 10.0 #速度寄与率
+    sigma_delta: 0.04
+    <arg name="sigma_gamma" default="0.005"/>
+    <!-- enable measurement -->
+    <arg name="min_ndt_tp" default="1.1"/>
+    <arg name="min_ndt_nvtl" default="1.5"/>
+    <arg name="min_gnss_fix_quality" default="3"/>
+    <arg name="max_gnss_hdop" default="2.0"/>
+    <arg name="max_beta_deg" default="3.0"/>
+    <!--arg name="max_dist" default="1000.0"/--> <!-- tmp -->
+    <arg name="max_dist" default="50.0"/>
+    <arg name="show_debug_info" default="true"/>
+  
+    <!-- use pose -->
+    <!--arg name="use_ekf_pose" default="true"/-->
+    <arg name="enable_ndt" default="true"/>
+    <arg name="enable_gnss" default="true"/>
+    <arg name="enable_gmps" default="false"/>
+

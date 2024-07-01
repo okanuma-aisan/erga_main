@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="output_signal_topic" default="/perception/traffic_light_recognition/external/traffic_signals"/>
+  <arg name="lanelet2_map_file" default="/home/sit/load_data/okabe/pcd/create_wan/okabe_mgrs/lanelet2_map_okabe_r16.osm"/>
+  <arg name="listen_address" default="0.0.0.0"/>
+  <arg name="listen_port" default="9385"/>
+
+  <node pkg="nshinjuku_traffic_signal" exec="main">
+    <remap from="~/pub/external_traffic_signals" to="$(var output_signal_topic)"/>
+    <param name="lanelet2_map_file" value="$(var lanelet2_map_file)"/>
+    <param name="listen_address" value="$(var listen_address)"/>
+    <param name="listen_port" value="$(var listen_port)"/>
+  </node>
+</launch>

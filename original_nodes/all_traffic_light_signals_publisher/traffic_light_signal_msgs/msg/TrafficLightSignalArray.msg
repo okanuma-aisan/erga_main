@@ -1,0 +1,1 @@
+traffic_light_signal_msgs/TrafficLightSignal[] array

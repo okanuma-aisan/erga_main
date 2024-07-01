@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="accle_map_file" default="$(find-pkg-share raw_vehicle_cmd_converter_erga)/data/default/accel_map.csv"/>
+  <arg name="brake_map_file" default="$(find-pkg-share raw_vehicle_cmd_converter_erga)/data/default/brake_map.csv"/>
+
+  <group>
+    <include file="$(find-pkg-share raw_vehicle_cmd_converter)/launch/raw_vehicle_converter.launch.xml">
+      <arg name="csv_path_accel_map" value="$(var accle_map_file)"/>
+      <arg name="csv_path_brake_map" value="$(var brake_map_file)"/>
+    </include>
+
+    <include file="$(find-pkg-share wada_vmc)/launch/kvaser_rainbow.launch.py"/>
+  </group>
+</launch>

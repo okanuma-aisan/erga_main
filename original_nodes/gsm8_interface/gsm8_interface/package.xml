@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>gsm8_interface</name>
+  <version>0.0.0</version>
+  <description>The gsm8_interface package</description>
+  <maintainer email="aohsato@gmail.com">Akihito Ohsato</maintainer>
+  <author email="aohsato@gmail.com">Akihito Ohsato</author>
+  <author email="mkuri8m@gmail.com">Makoto Kurihara</author>
+  <license>Apache 2</license>
+
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+  <depend>autoware_auto_control_msgs</depend>
+  <depend>autoware_auto_vehicle_msgs</depend>
+  <depend>diagnostic_msgs</depend>
+  <depend>diagnostic_updater</depend>
+  <depend>geometry_msgs</depend>
+  <depend>gsm8_interface_msgs</depend>
+  <depend>raw_vehicle_cmd_converter</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+  <depend>signal_processing</depend>
+  <depend>std_msgs</depend>
+  <depend>tier4_api_msgs</depend>
+  <depend>tier4_api_utils</depend>
+  <depend>tier4_debug_msgs</depend>
+  <depend>tier4_external_api_msgs</depend>
+  <depend>tier4_vehicle_msgs</depend>
+  <exec_depend>gsm8_can_interface</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>autoware_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,4 @@
+/**:
+  ros__parameters:
+    can_velocity_error_ratio_threshold: 0.2 # error ratio threshold for can velocity diagnostics [-]
+    min_velocity_to_start_diagnosis: 2.0 # minimum velocity to start diagnosis [m/s]

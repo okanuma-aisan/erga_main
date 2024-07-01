@@ -1,0 +1,5 @@
+/**:
+  ros__parameters:
+    wheelrad_to_steering_can_value_left: 25009.6727514125
+    wheelrad_to_steering_can_value_right: 26765.9140133745
+    steer_ang_input_center: 0.0

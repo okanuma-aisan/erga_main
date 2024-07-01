@@ -1,0 +1,7 @@
+/**:
+  ros__parameters:
+    use_lidar_detect: True #LIDARの障害物情報をpublishに加える
+    use_mobileye_detect: True #MOBILEYEの障害物情報をpublishに加える
+    publish_hz: 10.5 #統合した障害物情報をpublishする最大周期 。autowareが適切に動作している場合、ERGAのlidar_detectは10hzで動作ているので、やや大きいhzを指定している。
+    mobileye_delete_time_th: 0.5 #古いmobileye情報を消去する時間
+    debug_marker: false #debug用marker表示機能

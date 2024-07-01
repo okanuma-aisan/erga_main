@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <!-- use pose -->
+  <arg name="use_ekf_pose" default="true"/>
+  <!-- switch enables -->
+  <arg name="enable_pole" default="false"/> <!--磁気マーカの極性をmarker.csvに設定していない場合はfalse-->
+  <arg name="enable_rfid" default="false"/> <!--RFIDを搭載していない場合、タグ番号の書き込みをしていない場合はfalse-->
+  <!-- marker.csv -->
+  <arg name="marker_table_csv_name" default="/home/sit/autoware_erga_humble2/src/original_nodes/gmps_driver/DATA/moriyama_mrgs.csv"/> <!-- 磁気マーカテーブルcsvのフルパス -->
+  <!-- TF from base_link to GMPS -->
+  <arg name="tf_x" default="1.5"/> <!--baselink to gmps +=front -->
+  <arg name="tf_y" default="0.075"/> <!--baselink to gmps +=right -->
+  <arg name="tf_yaw" default="0.0"/> <!--baselink to gmps +=CCW -->
+  <arg name="tf_rfid_x" default="0.0"/> <!--baselink to rfid +=front -->
+  <!-- parameters -->
+  <arg name="th_rfid_detect_range_m" default="0.3"/> <!-- RFIDの検知範囲。RFIDとマーカを対応付けする際の許容誤差 -->
+  <arg name="th_association_error_dist_m" default="1.0"/> <!-- この距離以内のマーカが見つからなければ対応付けエラー -->
+  <arg name="th_association_break_dist_m" default="0.5"/> <!-- この距離以内のマーカが見つかったら探索を打ち切る -->
+  <arg name="th_dist_double_marker_m" default="2.5"/> <!--二連マーカと判定する距離閾値-->
+  <arg name="th_yaw_diff_double_marker_rad" default="0.05"/> <!--二連マーカと判定するyaw変化閾値-->
+  <!-- covariance of gmps_pose -->
+  <arg name="sigma_x_gmps" default="0.07"/>
+  <arg name="sigma_y_gmps" default="0.07"/>
+  <arg name="sigma_theta_gmps" default="0.10"/>
+  <!-- topic name -->
+  <!--arg name="in_prev_pose_name" default="/localization/pose_twist_fusion_filter/pose_with_covariance_without_yawbias"/-->
+  <!--arg name="in_prev_pose_name" default="/localization/gnss_pose_estimator/gnss_baselink_pose"/-->
+  <arg name="in_prev_pose_name" default="/localization/pose_twist_fusion_filter/ekf_aichi_pose" unless="$(var use_ekf_pose)"/>
+  <arg name="in_prev_pose_name" default="/localization/pose_twist_fusion_filter/biased_pose_with_covariance" if="$(var use_ekf_pose)"/>
+  <arg name="in_gmps_detect_name" default="/sensing/gmps/gmps_detect"/>
+  <arg name="in_rfid_name" default="/in_rfid"/> <!--not used-->
+  <arg name="in_velocity_name" default="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
+  <arg name="out_gmps_pose_name" default="/localization/gmps_pose_estimator/gmps_pose"/>
+  <arg name="out_gmps_info_name" default="/localization/gmps_pose_estimator/gmps_info"/>
+
+
+
+  <group>
+    <node pkg="gmps_localizer" exec="gmps_localizer" name="gmps_localizer" output="screen">
+      <param name="enable_pole" value="$(var enable_pole)"/>
+      <param name="enable_rfid" value="$(var enable_rfid)"/>
+      <param name="marker_table_csv_name" value="$(var marker_table_csv_name)"/>
+      <param name="tf_x" value="$(var tf_x)"/>
+      <param name="tf_y" value="$(var tf_y)"/>
+      <param name="tf_yaw" value="$(var tf_yaw)"/>
+      <param name="tf_rfid_x" value="$(var tf_rfid_x)"/>
+      <param name="th_rfid_detect_range_m" value="$(var th_rfid_detect_range_m)"/>
+      <param name="th_association_error_dist_m" value="$(var th_association_error_dist_m)"/>
+      <param name="th_association_break_dist_m" value="$(var th_association_break_dist_m)"/>
+      <param name="th_dist_double_marker_m" value="$(var th_dist_double_marker_m)"/>
+      <param name="th_yaw_diff_double_marker_rad" value="$(var th_yaw_diff_double_marker_rad)"/>
+      <param name="sigma_x_gmps" value="$(var sigma_x_gmps)"/>
+      <param name="sigma_y_gmps" value="$(var sigma_y_gmps)"/>
+      <param name="sigma_theta_gmps" value="$(var sigma_theta_gmps)"/>
+
+      <remap from="in_prev_pose" to="$(var in_prev_pose_name)"/>
+      <remap from="in_gmps_detect" to="$(var in_gmps_detect_name)"/>
+      <remap from="in_rfid" to="$(var in_rfid_name)"/>
+      <remap from="in_velocity" to="$(var in_velocity_name)"/>
+      <remap from="out_gmps_pose" to="$(var out_gmps_pose_name)"/>
+      <remap from="out_gmps_info" to="$(var out_gmps_info_name)"/>
+    </node>
+
+  </group>
+</launch>

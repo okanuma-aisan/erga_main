@@ -1,0 +1,54 @@
+<launch>
+  <!-- kvaser can param -->
+  <arg name="hardware_id" default="101155" />
+  <arg name="circuit_id" default="0" />
+  <arg name="bit_rate" default="500000" />
+
+  <!-- ARS408 driver param -->
+  <arg name="can_frame_topic" default="can_tx" />
+  <arg name="radar_objects_topic" default="objects" />
+  <arg name="radar_scan_topic" default="scan" />
+  <arg name="output_frame" default="lidar_front_left"/>
+  <arg name="publish_radar_track" default="true" />
+  <arg name="publish_radar_scan" default="false" />
+  <arg name="sequential_publish" default="true" />
+  <arg name="size_x" default="1.8" />
+  <arg name="size_y" default="1.8" />
+
+  <!-- radar_tracks_msgs_converter param -->
+  <arg name="input/odometry" default="/localization/kinematic_state" />
+  <arg name="output/radar_detected_objects" default="detected_objects" />
+  <arg name="output/radar_tracked_objects" default="tracked_objects" />
+  <arg name="update_rate_hz" default="10.0" />
+  <arg name="use_twist_compensation" default="false" />
+  
+  <group>
+    <node pkg="kvaser_interface" exec="kvaser_can_bridge" output="screen">
+      <param name="hardware_id" value="$(var hardware_id)" />
+      <param name="circuit_id" value="$(var circuit_id)" />
+      <param name="bit_rate" value="$(var bit_rate)" />
+    </node>
+
+    <node pkg="pe_ars408_ros" exec="pe_ars408_node" output="screen">
+      <remap from="~/input/frame" to="$(var can_frame_topic)" />
+      <remap from="~/output/objects" to="$(var radar_objects_topic)" />
+      <remap from="~/output/scan" to="$(var radar_scan_topic)" />
+      <param name="output_frame" value="$(var output_frame)"/>
+      <param name="publish_radar_track" value="$(var publish_radar_track)" />
+      <param name="publish_radar_scan" value="$(var publish_radar_scan)" />
+      <param name="sequential_publish" value="$(var sequential_publish)" />
+      <param name="size_x" value="$(var size_x)" />
+      <param name="size_y" value="$(var size_y)" />
+    </node>
+
+    <node pkg="radar_tracks_msgs_converter" exec="radar_tracks_msgs_converter_node" name="radar_tracks_msgs_converter" output="screen">
+      <remap from="~/input/radar_objects" to="$(var radar_objects_topic)"/>
+      <remap from="~/input/odometry" to="$(var input/odometry)"/>
+      <remap from="~/output/radar_detected_objects" to="$(var output/radar_detected_objects)"/>
+      <remap from="~/output/radar_tracked_objects" to="$(var output/radar_tracked_objects)"/>
+      <param name="update_rate_hz" value="$(var update_rate_hz)"/>
+      <param name="use_twist_compensation" value="$(var use_twist_compensation)"/>
+    </node>
+  </group>
+  
+</launch>

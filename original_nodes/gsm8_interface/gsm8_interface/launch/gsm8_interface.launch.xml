@@ -1,0 +1,20 @@
+<launch>
+  <arg name="can_device" default="can0"/>
+  <arg name="frame_id" default="base_link"/>
+  <arg name="gsm8_interface_param_path" default="$(find-pkg-share gsm8_interface)/config/gsm8_interface.param.yaml"/>
+  <arg name="vehicle_calibration_param_path" default="$(find-pkg-share gsm8_interface)/config/vehicle_calibration.param.yaml"/>
+
+  <group>
+    <push-ros-namespace namespace="gsm8"/>
+    <include file="$(find-pkg-share gsm8_can_interface)/launch/gsm8_can_interface.launch.xml">
+      <arg name="can_device" value="$(var can_device)"/>
+      <arg name="frame_id" value="$(var frame_id)"/>
+    </include>
+
+    <node pkg="gsm8_interface" name="gsm8_interface" exec="gsm8_interface" output="screen">
+      <param from="$(var gsm8_interface_param_path)"/>
+      <param from="$(var vehicle_calibration_param_path)"/>
+    </node>
+  </group>
+
+</launch>

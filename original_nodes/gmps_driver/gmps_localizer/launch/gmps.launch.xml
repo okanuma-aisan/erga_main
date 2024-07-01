@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <group>
+    <push-ros-namespace namespace="gmps"/>
+    <include file="$(find-pkg-share gmps_driver)/launch/gmps_tcp_driver_receive.launch.xml">
+    </include>
+
+    <include file="$(find-pkg-share gmps_localizer)/launch/gmps_localizer.launch.xml">
+    </include>
+
+    <include file="$(find-pkg-share gmps_driver)/launch/gmps_udp_pub.launch.xml">
+    </include>
+  </group>
+</launch>

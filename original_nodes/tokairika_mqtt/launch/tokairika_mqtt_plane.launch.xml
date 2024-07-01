@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="mqtt_host" default="a1sjxnq4b8uinx-ats.iot.ap-northeast-1.amazonaws.com"/>
+  <arg name="tls_ca" default="/home/sit/load_data/tokai_rika/AmazonRootCA1.pem"/>
+  <arg name="tls_crt" default="/home/sit/load_data/tokai_rika/35568e97afba5f1cf52a78e2aadea54140909faf2a41096fbab66e29ca1cd411-certificate.pem.crt"/>
+  <arg name="tls_key" default="/home/sit/load_data/tokai_rika/35568e97afba5f1cf52a78e2aadea54140909faf2a41096fbab66e29ca1cd411-private.pem.key"/>
+  <arg name="car_id" default="0001"/>
+  <arg name="topic_date" default="/sensing/gnss/novatel_oem7/date"/>
+  <arg name="topic_can501" default="/vehicle/wada_vmc/pedal/can501"/>
+  <arg name="topic_can502" default="/vehicle/wada_vmc/steer/can502"/>
+  <arg name="topic_curr_pos" default="/localization/pose_with_covariance"/>
+  <arg name="topic_curr_vel" default="/localization/pose_twist_fusion_filter/twist_with_covariance"/>
+  <arg name="topic_blinker" default="/vehicle/status/turn_indicators_status"/>
+  <arg name="plane_number" default="7"/>
+
+  <group>
+    <push-ros-namespace namespace="tokai_rika"/>
+
+    <node pkg="tokairika_mqtt" exec="tokairika_mqtt_sub" name="tokairika_mqtt_sub" output="log">
+      <param name="mqtt_host" value="$(var mqtt_host)"/>
+      <param name="tls_ca" value="$(var tls_ca)"/>
+      <param name="tls_crt" value="$(var tls_crt)"/>
+      <param name="tls_key" value="$(var tls_key)"/>
+      <param name="car_id" value="$(var car_id)"/>
+    </node>
+
+    <node pkg="tokairika_mqtt" exec="tokairika_mqtt_pub" name="tokairika_mqtt_pub" output="screen">
+      <param name="mqtt_host" value="$(var mqtt_host)"/>
+      <param name="tls_ca" value="$(var tls_ca)"/>
+      <param name="tls_crt" value="$(var tls_crt)"/>
+      <param name="tls_key" value="$(var tls_key)"/>
+      <param name="car_id" value="$(var car_id)"/>
+      <param name="plane_number" value="$(var plane_number)"/>
+      <remap from="topic_date" to="$(var topic_date)"/>
+      <remap from="topic_can501" to="$(var topic_can501)"/>
+      <remap from="topic_can502" to="$(var topic_can502)"/>
+      <remap from="topic_curr_pos" to="$(var topic_curr_pos)"/>
+      <remap from="topic_curr_vel" to="$(var topic_curr_vel)"/>
+      <remap from="topic_blinker" to="$(var topic_blinker)"/>
+    </node>
+  </group>
+</launch>

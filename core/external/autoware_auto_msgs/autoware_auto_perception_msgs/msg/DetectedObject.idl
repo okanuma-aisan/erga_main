@@ -1,0 +1,23 @@
+#include "autoware_auto_perception_msgs/msg/DetectedObjectKinematics.idl"
+#include "autoware_auto_perception_msgs/msg/ObjectClassification.idl"
+#include "autoware_auto_perception_msgs/msg/Shape.idl"
+
+module autoware_auto_perception_msgs {
+  module msg {
+    module DetectedObject_Constants {
+      const uint8 DEVICE_LIDAR = 0;//RIDARで検出
+      const uint8 DEVICE_MOBILEYE = 1;//MOBILEYEで検出
+
+    };
+
+    struct DetectedObject {
+      @range (min=0.0, max=1.0)
+      float existence_probability;
+
+      sequence<autoware_auto_perception_msgs::msg::ObjectClassification> classification;
+      autoware_auto_perception_msgs::msg::DetectedObjectKinematics kinematics;
+      autoware_auto_perception_msgs::msg::Shape shape;
+      uint8 detection_device;//この障害物データを検出したデバイス
+    };
+  };
+};

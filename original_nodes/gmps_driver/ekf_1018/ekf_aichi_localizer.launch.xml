@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <!-- vehicle static tf  -->
+  <arg name="lr" default="1.384211"/>  <!-- ERGAとrainbowでパラメータ選択したい、というか上位のyamlとかから吸収したい-->
+  <arg name="lw" default="4.4"/>
+  <arg name="Ksf" default="0.001"/>
+  <arg name="Kbeta0" default="-0.015"/>
+  <!-- kalman filter config -->
+  <arg name="timer_freq" default="50.0"/>
+  <!-- measurement noise -->
+  <arg name="sigma_x_ndt" default="0.27"/>
+  <arg name="sigma_y_ndt" default="0.27"/>
+  <arg name="sigma_theta_ndt" default="0.1"/>
+  <!--arg name="sigma_x_gnss" default="0.07"/-->
+  <!--arg name="sigma_theta_ndt" default="0.15"/-->
+  <!--arg name="sigma_y_gnss" default="0.07"/-->
+  <arg name="sigma_x_gnss" default="0.27"/>
+  <arg name="sigma_y_gnss" default="0.27"/>
+  <arg name="sigma_theta_gnss" default="0.1"/>
+  <arg name="sigma_x_gmps" default="0.07"/>
+  <arg name="sigma_y_gmps" default="0.07"/>
+  <!--arg name="sigma_theta_gmps" default="0.1"/-->
+  <arg name="sigma_theta_gmps" default="0.3"/>
+  <!-- process noise -->
+  <arg name="sigma_v" default="10.0"/>
+  <arg name="sigma_delta" default="0.04"/>
+  <arg name="sigma_gamma" default="0.005"/>
+  <!-- enable measurement -->
+  <arg name="min_ndt_tp" default="1.1"/>
+  <arg name="min_ndt_nvtl" default="1.5"/>
+  <arg name="min_gnss_fix_quality" default="3"/>
+  <arg name="max_gnss_hdop" default="2.0"/>
+  <arg name="max_beta_deg" default="3.0"/>
+  <arg name="max_dist" default="1000.0"/> <!-- tmp -->
+  <arg name="enable_ndt" default="true"/>
+  <arg name="enable_gnss" default="false"/>
+  <arg name="enable_gmps" default="false"/>
+  <arg name="show_debug_info" default="true"/>
+  
+  <!-- use pose -->
+  <!--arg name="use_ekf_pose" default="true"/-->
+  <arg name="enable_ndt" default="true"/>
+  <arg name="enable_gnss" default="false"/>
+  <arg name="enable_gmps" default="false"/>
+
+  <!-- topic name -->
+  <arg name="in_ndt_pose_name" default="/localization/pose_twist_fusion_filter/biased_pose_with_covariance"/>
+  <arg name="in_autoware_ekf_twist" default="/localization/pose_twist_fusion_filter/twist_with_covariance"/>
+  <arg name="in_gnss_pose_name" default="/localization/gnss_pose_estimator/gnss_baselink_pose"/>
+  <arg name="in_gmps_pose_name" default="/localization/gmps_pose_estimator/gmps_pose"/>
+  <arg name="twist_frame_id" default="base_link"/>
+  <arg name="out_ekf_aichi_pose" default="ekf_aichi_pose"/>
+  <arg name="out_odom_name" default="kinematic_state_aichi"/>
+
+  <arg name="in_velocity_name" default="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
+  <!--arg name="in_velocity_name" default="/sensing/can_number2/absolute_speed/average"/-->
+  <!--arg name="in_delta_name" default="/vehicle/steer/can502"/-->
+  <arg name="in_delta_name" default="/vehicle/status/steering_status"/>
+  <arg name="in_gamma_name" default="/sensing/gnss/novatel_oem7/imu"/>
+  <arg name="in_ndt_tp_name" default="/localization/pose_estimator/transform_probability"/>
+  <arg name="in_ndt_nvtl_name" default="/localization/pose_estimator/nearest_voxel_transformation_likelihood"/>
+  <arg name="in_gnss_gpgga_name" default="/sensing/gnss/novatel_oem7/gpgga"/>
+
+  <arg name="ndt_init" default="/localization/pose_estimator/ndt_init"/> <!-- sai add 2023_08_22 NDT初期化開始時に送られるtopic -->
+
+  <group>
+    <node pkg="ekf_aichi_localizer" exec="ekf_aichi_localizer" name="ekf_aichi_localizer" output="screen">
+      <param name="lr" value="$(var lr)"/>
+      <param name="lw" value="$(var lw)"/>
+      <param name="Ksf" value="$(var Ksf)"/>
+      <param name="Kbeta0" value="$(var Kbeta0)"/>
+      <param name="timer_freq" value="$(var timer_freq)"/>
+      <param name="sigma_x_ndt" value="$(var sigma_x_ndt)"/>
+      <param name="sigma_y_ndt" value="$(var sigma_y_ndt)"/>
+      <param name="sigma_theta_ndt" value="$(var sigma_theta_ndt)"/>
+      <param name="sigma_x_gnss" value="$(var sigma_x_gnss)"/>
+      <param name="sigma_y_gnss" value="$(var sigma_y_gnss)"/>
+      <param name="sigma_theta_gnss" value="$(var sigma_theta_gnss)"/>
+      <param name="sigma_x_gmps" value="$(var sigma_x_gmps)"/>
+      <param name="sigma_y_gmps" value="$(var sigma_y_gmps)"/>
+      <param name="sigma_theta_gmps" value="$(var sigma_theta_gmps)"/>
+      <param name="sigma_v" value="$(var sigma_v)"/>
+      <param name="sigma_delta" value="$(var sigma_delta)"/>
+      <param name="sigma_gamma" value="$(var sigma_gamma)"/>
+      <param name="min_ndt_tp" value="$(var min_ndt_tp)"/>
+      <param name="min_ndt_nvtl" value="$(var min_ndt_nvtl)"/>
+      <param name="min_gnss_fix_quality" value="$(var min_gnss_fix_quality)"/>
+      <param name="max_gnss_hdop" value="$(var max_gnss_hdop)"/>
+      <param name="max_beta_deg" value="$(var max_beta_deg)"/>
+      <param name="max_dist" value="$(var max_dist)"/>
+      <param name="enable_ndt" value="$(var enable_ndt)"/>
+      <param name="enable_gnss" value="$(var enable_gnss)"/>
+      <param name="enable_gmps" value="$(var enable_gmps)"/>
+      <param name="show_debug_info" value="$(var show_debug_info)"/>
+      <param name="twist_frame_id" value="$(var twist_frame_id)"/>
+      <remap from="in_ndt_pose" to="$(var in_ndt_pose_name)"/>
+      <remap from="in_gnss_pose" to="$(var in_gnss_pose_name)"/>
+      <remap from="in_gmps_pose" to="$(var in_gmps_pose_name)"/>
+      <remap from="in_velocity" to="$(var in_velocity_name)"/>
+      <remap from="in_delta" to="$(var in_delta_name)"/>
+      <remap from="in_gamma" to="$(var in_gamma_name)"/>
+      <remap from="in_ndt_tp" to="$(var in_ndt_tp_name)"/>
+      <remap from="in_ndt_nvtl" to="$(var in_ndt_nvtl_name)"/>
+      <remap from="in_gnss_gpgga" to="$(var in_gnss_gpgga_name)"/>
+      <remap from="out_ekf_aichi_pose" to="$(var out_ekf_aichi_pose)"/>
+      <remap from="out_odom_name" to="$(var out_odom_name)"/>
+      <remap from="in_autoware_ekf_twist" to="$(var in_autoware_ekf_twist)"/>
+      <remap from="ndt_init" to="$(var ndt_init)"/>
+    </node>
+  </group>
+
+  <!--group if="$(var use_ekf_pose)">
+    <include file="$(find-pkg-share stop_filter)/launch/stop_filter.launch.xml">
+      <arg name="use_twist_with_covariance" value="True"/>
+      <arg name="input_odom_name" value="$(var out_odom_name)"/>
+      <arg name="input_twist_with_covariance_name" value="/localization/pose_twist_fusion_filter/twist_with_covariance"/>
+      <arg name="output_odom_name" value="/localization/kinematic_state"/>
+    </include>
+  </group>
+
+  <group if="$(var use_ekf_pose)">
+    <include file="$(find-pkg-share twist2accel)/launch/twist2accel.launch.xml">
+      <arg name="use_odom" value="true"/>
+      <arg name="in_odom" value="$(var out_odom_name)"/>
+      <arg name="in_twist" value="/localization/twist_estimator/twist_with_covariance"/>
+      <arg name="out_accel" value="/localization/acceleration"/>
+    </include>
+  </group-->
+</launch>

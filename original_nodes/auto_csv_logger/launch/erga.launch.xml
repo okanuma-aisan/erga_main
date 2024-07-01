@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="log_path" default="/home/sit/csv_logger" />
+  <!--arg name="filename_format" default="%Y-%m-%d_%H-%M-%S.csv" /-->
+  <arg name="log_topics" default="/vehicle/wada_vmc/steer/steer_clutch;/vehicle/wada_vmc/pedal/pedal_clutch;/sensing/gnss/novatel_oem7/surface_speed;/vehicle/status/velocity_status;/localization/pose_twist_fusion_filter/debug_ekf_log" />
+  <arg name="log_trigger_topic" default="/vehicle/contec/log_trigger" />
+
+  <node pkg="auto_csv_logger" exec="main">
+    <param name="log_path" value="$(var log_path)"/>
+    <!--param name="filename_format" value="$(var filename_format)"/-->
+    <param name="log_topics" value="$(var log_topics)" />
+    <remap from="~/log_trigger" to="$(var log_trigger_topic)"/>
+  </node>
+</launch>
+

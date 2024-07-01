@@ -1,0 +1,10 @@
+/**:
+  ros__parameters:
+    use_gpgga_main: true #Main側でgpggaを使用するか？
+    use_gpgga_sub: false #Sub側でgpggaを使用するか？
+    hdop_th_main: 2.0 #gpggaのhdopがこの数値を超えたら場合はレポートを扱わない(Main)
+    hdop_th_sub: 2.0 #gpggaのhdopがこの数値を超えたら場合はレポートを扱わない(Sub)
+    diff_time_velocity_th_main: 0.2 #Mainのvelocityレポートのsubscribe時間が現在時刻とこの秒数まで離れていたら、sub側のvelocityレポートを使用する
+    diff_time_velocity_th_sub: 0.2 #Subのvelocityレポートのsubscribe時間が現在時刻とこの秒数まで離れていたら、エラーにする
+    diff_time_steering_th_main: 0.2 #Mainのsteeringレポートのsubscribe時間が現在時刻とこの秒数まで離れていたら、sub側のsteeringレポートを使用する
+    diff_time_steering_th_sub: 0.2 #Subのsteeringレポートのsubscribe時間が現在時刻とこの秒数まで離れていたら、エラーにする

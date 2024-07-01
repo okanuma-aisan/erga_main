@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="launch_driver" default="true"/>
+  <arg name="serial" default="/dev/serial/by-id/usb-NovAtel_Inc._NovAtel_GPS_Receiver_DMMU21470314E-if00-port0"/>
+  <arg name="baud" default="115200"/>
+
+  <arg name="acceleration_scale_factor" default="0.00000000186265"/>
+  <arg name="gyroscope_scale_factor" default="0.000000000116415"/>
+  <arg name="imu_hz" default="100"/>
+
+  <group>
+    <push-ros-namespace namespace="novatel_oem7"/>
+    
+    <group if="$(var launch_driver)">
+      <node pkg="novatel_oem7_driver" exec="novatel_oem7_driver" name="novatel_oem7_driver" output="log">
+        <param name="serial" value="$(var serial)"/>
+        <param name="baud" value="$(var baud)"/>
+      </node>
+    </group>
+
+
+    <node pkg="novatel_oem7_driver" exec="novatel_sentence_to_navsatfix" name="novatel_sentence_to_navsatfix" output="log">
+      <param name="acceleration_scale_factor" value="$(var acceleration_scale_factor)"/>
+      <param name="gyroscope_scale_factor" value="$(var gyroscope_scale_factor)"/>
+      <param name="imu_hz" value="$(var imu_hz)"/>
+      <!--remap from="surface_speed" to="/sensing/vehicle_velocity_converter/twist_with_covariance"/-->
+      <!--remap from="imu" to="/sensing/imu/imu_data"/-->
+    </node>
+  </group>
+</launch>

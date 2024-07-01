@@ -1,0 +1,15 @@
+# Vim
+*.swp
+*.swo
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# catkin / colcon
+build/
+install/
+log/
+
+# Python
+*.pyc

@@ -1,0 +1,5 @@
+std_msgs/Header header
+gsm8_interface_msgs/BLNStatus bln
+gsm8_interface_msgs/HRNStatus hrn
+gsm8_interface_msgs/LGTStatus lgt
+gsm8_interface_msgs/DORStatus dor

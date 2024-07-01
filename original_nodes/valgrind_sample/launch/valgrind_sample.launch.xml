@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="valgrind_sample" exec="valgrind_sample" name="valgrind_sample" output="log" launch-prefix="valgrind --tool=callgrind">
+  </node>
+</launch>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>gsm8_monitor</name>
+  <version>0.0.0</version>
+  <description>The gsm8_monitor package</description>
+  <maintainer email="mkuri8m@gmail.com">Makoto Kurihara</maintainer>
+  <author email="mkuri8m@gmail.com">Makoto Kurihara</author>
+  <license>Apache 2</license>
+
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+  <depend>diagnostic_msgs</depend>
+  <depend>diagnostic_updater</depend>
+  <depend>geometry_msgs</depend>
+  <depend>gsm8_interface_msgs</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>autoware_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

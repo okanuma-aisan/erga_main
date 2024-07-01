@@ -1,0 +1,24 @@
+<launch>
+  <arg name="param_file" default="$(find-pkg-share auto_permission)/config/auto_permission.param.yaml"/>
+
+  <arg name="transform_probability" default="transform_probability"/>
+  <arg name="nearest_voxel_transformation_likelihood" default="nearest_voxel_transformation_likelihood"/>
+  <arg name="gnss_dev" default="gnss_dev"/>
+  <arg name="kinematic_stat" default="kinematic_stat"/>
+  <arg name="scenario_trajectry" default="scenario_trajectry"/>
+  <arg name="scenario_path" default="scenario_path"/>
+  <arg name="steer_auto_mode" default="steer_auto_mode"/>
+  <arg name="pedal_auto_mode" default="pedal_auto_mode"/>
+
+  <node pkg="auto_permission" exec="auto_permission" name="auto_permission" output="log">
+    <remap from="transform_probability" to="$(var transform_probability)"/>
+    <remap from="nearest_voxel_transformation_likelihood" to="$(var nearest_voxel_transformation_likelihood)"/>
+    <remap from="gnss_dev" to="$(var gnss_dev)"/>
+    <remap from="kinematic_stat" to="$(var kinematic_stat)"/>
+    <remap from="scenario_trajectry" to="$(var scenario_trajectry)"/>
+    <remap from="scenario_path" to="$(var scenario_path)"/>
+    <remap from="steer_auto_mode" to="$(var steer_auto_mode)"/>
+    <remap from="pedal_auto_mode" to="$(var pedal_auto_mode)"/>
+    <param from="$(var param_file)"/>
+  </node>
+</launch>

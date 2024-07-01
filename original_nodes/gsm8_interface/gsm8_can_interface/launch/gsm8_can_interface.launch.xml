@@ -1,0 +1,15 @@
+<launch>
+  <arg name="can_device" default="can0"/>
+  <arg name="frame_id" default="base_link"/>
+
+  <include file="$(find-pkg-share ros2_socketcan)/launch/socket_can_bridge.launch.xml">
+    <arg name="interface" value="$(var can_device)"/>
+    <arg name="receiver_interval_sec" value="0.02"/>
+    <arg name="sender_timeout_sec" value="0.02"/>
+  </include>
+
+  <node pkg="gsm8_can_interface" name="gsm8_can_interface" exec="gsm8_can_interface" output="screen">
+    <param name="frame_id" value="$(var frame_id)"/>
+  </node>
+
+</launch>

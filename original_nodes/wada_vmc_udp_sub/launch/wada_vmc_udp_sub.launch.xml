@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="ip" default="0.0.0.0"/>
+  <arg name="port" default="4006"/>
+
+  <arg name="steering_status" default="steering_status"/>
+  <arg name="velocity_status" default="velocity_status"/>
+
+  <group>
+    <node pkg="wada_vmc_udp_sub" exec="wada_vmc_udp_sub" name="wada_vmc_udp_sub" output="log">
+      <param name="ip" value="$(var ip)"/>
+      <param name="port" value="$(var port)"/>
+      <remap from="steering_status" to="$(var steering_status)"/>
+      <remap from="velocity_status" to="$(var velocity_status)"/>
+    </node>
+  </group>
+</launch>

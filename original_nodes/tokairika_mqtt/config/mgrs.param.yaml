@@ -1,0 +1,11 @@
+/**:
+  ros__parameters:
+    mqtt_host: "a1sjxnq4b8uinx-ats.iot.ap-northeast-1.amazonaws.com"
+    tls_ca: "/home/sit/load_data/tokai_rika/AmazonRootCA1.pem"
+    tls_crt: "/home/sit/load_data/tokai_rika/35568e97afba5f1cf52a78e2aadea54140909faf2a41096fbab66e29ca1cd411-certificate.pem.crt"
+    tls_key: "/home/sit/load_data/tokai_rika/35568e97afba5f1cf52a78e2aadea54140909faf2a41096fbab66e29ca1cd411-private.pem.key"
+    car_id: "0001"
+    mgrs_utm_zone: "53"
+    mgrs_lat_band: "S"
+    mgrs_lattice_id: "PV"
+

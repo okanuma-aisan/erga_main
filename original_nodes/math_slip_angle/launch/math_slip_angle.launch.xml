@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <group>
+    <push-ros-namespace namespace="slip_angle"/>
+
+    <node pkg="math_slip_angle" exec="math_slip_angle" name="math_slip_angle" output="screen">
+      <remap from="curr_pos" to="/localization/pose_twist_fusion_filter/pose_with_covariance_without_yawbias"/>
+      <remap from="curr_twist" to="/localization/pose_twist_fusion_filter/twist_with_covariance"/>
+    </node>
+  </group>
+</launch>

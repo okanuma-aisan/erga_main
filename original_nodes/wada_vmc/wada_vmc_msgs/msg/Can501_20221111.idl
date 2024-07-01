@@ -1,0 +1,100 @@
+#include "builtin_interfaces/msg/Time.idl"
+
+module wada_vmc_msgs {
+  module msg {
+    module Can501_20221111_Constants {
+      const uint8 DRIVE_MODE_AUTO = 10;//自動運転モード
+      const uint8 DRIVE_MODE_MANUAL = 0;//手動運転モード
+      const uint8 DRIVE_MODE_UNESTABLISHED = 5;//通信未確立
+
+      const uint8 PULSE_MODE1 = 1;
+      const uint8 PULSE_MODE2 = 2;
+      const uint8 PULSE_MODE4 = 4;
+      const uint8 PULSE_MODE8 = 8;
+      const uint8 PULSE_MODE16 = 0;
+    };
+    
+    struct Can501_20221111
+    {
+      builtin_interfaces::msg::Time stamp;
+
+      @default (value=5)
+      uint8 drive_mode;//運転モード 詳細は上記の定数を参照
+
+      @default (value=0)
+      uint16 speed_kmh20;//車両速度(km/h)×20
+
+      @default (value=0.0) 
+      double speed_kmh; //車両速度(km/h)
+
+      @default (value=0)
+      uint8 pedal_do;//ペダル側DO状態
+
+      @default (value=0)
+      int16 pedal_pot_sub_v;//ペダルポテンショメーター、サブ側の電圧値(V)
+
+      @default (value=0)
+      uint8 pedal_di;//ペダル側DI状態
+
+      @default (value=0)
+      int16 pedal_pot_main_v;//ペダルポテンショメーター、メイン側の電圧値(V)
+
+      @default (value=0)
+      int16 pedal_pot_average; //ペダルポテンショメーターのメインとサブの平均
+
+      @default (value=0)
+      int16 pedal_pot_max; //ペダルポテンショメーターのメインとサブの大きいほう
+
+      @default (value=FALSE)
+      boolean auto_mode;//true:自動運転モード false:マニュアルモード
+
+      @default (value=1)
+      uint8 pulse_mode;//パルスモード  １：Ｐ１，２：Ｐ２，４：Ｐ４，８：Ｐ８，０：Ｐ１６
+
+      @default (value=FALSE)
+      boolean abnormal_air_pressure;//空気圧異常
+
+      @default (value=FALSE)
+      boolean write_permission_on;//書き込み許可線ON
+
+      @default (value=FALSE)
+      boolean temperature_anomaly;//温度異常
+
+      @default (value=FALSE)
+      boolean over_current;//過電流
+
+      @default (value=FALSE)
+      boolean clutch;//クラッチスイッチ状態
+
+      @default (value=FALSE)
+      boolean brake_lock_set;//ブレーキロックセット(ハンドルでは未使用、常に０)
+
+      @default (value=FALSE)
+      boolean motor_disconnection;//モーター線断線
+
+      @default (value=FALSE)
+      boolean power_supply_voltage_drop;//電源電圧低
+
+      @default (value=FALSE)
+      boolean clutch_disconnection;//クラッチ線断線
+
+      @default (value=FALSE)
+      boolean mecha_potentiometer_disconnection;//メカポテンション断線
+
+      @default (value=FALSE)
+      boolean joy_disconnection;//ジョイスティック断線
+
+      @default (value=0)
+      uint16 pedal_command_voltage;//ペダル指令電圧データ  データ　0-2048　が0-5Vに対応
+
+      @default (value=0.0)
+      float pedal_command_voltage_v;//pedal_command_voltageを電圧値に変換したもの
+
+      @default (value=0)
+      int16 pedal_displacement;//ペダル変位量　ペダル計測用ポテンショメータの測定値とする２０２０．４．９
+
+      @default (value=0)
+      uint16 engine_rpm;//エンジン回転数 RPM表記
+    };
+  };
+};

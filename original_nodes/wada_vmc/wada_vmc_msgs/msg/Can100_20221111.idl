@@ -1,0 +1,58 @@
+#include "builtin_interfaces/msg/Time.idl"
+
+module wada_vmc_msgs {
+  module msg {
+    module Can100_20221111_Constants {
+      const uint8 STEER_FIRSTLOCK_OPEN = 5;//joyボードの起動時ロック解除命令1
+      const uint8 PEDAL_FIRSTLOCK_OPEN = 5;//joyボードの起動時ロック解除命令1
+      const uint8 STEER_MANUAL = 0;//ステアMANUAL
+      const uint8 PEDAL_MANUAL = 0;//ペダルMANUAL
+      const uint8 STEER_AUTO = 10;//ステアAUTO
+      const uint8 PEDAL_AUTO = 10;//ペダルAUTO
+    };
+    
+    struct Can100_20221111
+    {
+      builtin_interfaces::msg::Time stamp;
+
+      @default (value=0)
+      uint8 pedal_control_mode;//pedalの自動・手動状態
+
+      @default (value=0)
+      uint8 steer_control_mode;//steerの自動・手動状態
+
+      @default (value=1024)
+      int16 pedal_cmd;//#ペダル指令値 ブレーキペダル作動を増加方向、アクセルペダル差動を減少方向とする。
+
+      @default (value=1024)
+      int16 handle_cmd;//ハンドル指令値 左回転を増加方向、右回転を減少方向とする。
+
+      @default (value=FALSE)
+      boolean pedal_auto_permission;//ペダル自動可否
+
+      @default (value=FALSE)
+      boolean pedal_failsafe;//ペダルフェイルセーフ  trueでフェイルセイフ
+
+      @default (value=FALSE)
+      boolean breke_takeover_latch;//ブレーキのテイクオーバー保持非保持切り替え（falseで状態保持）
+
+      @default (value=0)
+      uint8 pedal_do;//ペダル側のクラッチを除いたDO指令
+
+      @default (value=FALSE)
+      boolean pedal_clutch_ban;//ペダルクラッチ切信号 trueならclutchが切れる
+
+      @default (value=FALSE)
+      boolean handle_auto_permission;//ハンドル自動可否
+
+      @default (value=FALSE)
+      boolean handle_failsafe;//ハンドルフェイルセーフ  trueでフェイルセイフ
+
+      @default (value=0)
+      uint8 handle_do;//ハンドル側のクラッチを除いたDO指令
+
+      @default (value=FALSE)
+      boolean handle_clutch_ban;//ハンドルクラッチ切信号 trueならclutchが切れる
+    };
+  };
+};

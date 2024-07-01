@@ -1,0 +1,14 @@
+#include "builtin_interfaces/msg/Time.idl"
+#include "detect_fusion_msgs/msg/MobileyeObstacleStamp.idl"
+
+module detect_fusion_msgs {
+  module msg {
+    //module MobileyeObstacleStamp_Constants {
+    //  const uint8 STEER_FIRSTLOCK_OPEN = 5;//joyボードの起動時ロック解除命令1
+    //};
+    
+    struct MobileyeObstacleStampArray {
+	sequence<detect_fusion_msgs::msg::MobileyeObstacleStamp> array;
+    };
+  };
+};
